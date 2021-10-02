@@ -1,0 +1,51 @@
+{
+    "name": "yogcloud/framework",
+    "type": "library",
+    "keywords": [
+        "php",
+        "hyperf",
+        "yogcloud",
+        "framework"
+    ],
+    "description": "fast Framework of YogCloud",
+    "autoload": {
+        "psr-4": {
+            "YogCloud\\Framework\\": "src/"
+        },
+        "files": [
+            "src/Functions.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "HyperfTest\\": "tests"
+        }
+    },
+    "require": {
+        "php": ">=7.4",
+        "ext-swoole": ">=4.5"
+    },
+    "require-dev": {
+        "96qbhy/hyperf-auth": "^2.2",
+        "friendsofphp/php-cs-fixer": "^2.14",
+        "hyperf/framework": "^2.0",
+        "hyperf/testing": "2.0.*",
+        "overtrue/wechat": "~4.0",
+        "phpstan/phpstan": "^0.12",
+        "swoole/ide-helper": "dev-master",
+        "hyperf/guzzle": "^2.0"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "scripts": {
+        "test": "co-phpunit -c phpunit.xml --colors=always",
+        "analyse": "phpstan analyse --memory-limit 1024M -l 0 ./src",
+        "cs-fix": "php-cs-fixer fix $1"
+    },
+    "extra": {
+        "hyperf": {
+            "config": "YogCloud\\Framework\\ConfigProvider"
+        }
+    }
+}

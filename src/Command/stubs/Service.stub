@@ -1,0 +1,90 @@
+<?php
+
+declare(strict_types=1);
+
+namespace #SERVICE_NAMESPACE#;
+
+use #MODEL_NAMESPACE#\#MODEL#;
+use #INTERFACE_NAMESPACE#\#MODEL#ServiceInterface;
+use YogCloud\Framework\Service\AbstractService;
+
+class #MODEL#Service extends AbstractService implements #MODEL#ServiceInterface
+{
+    /**
+     * @var #MODEL#
+     */
+    protected $model;
+
+    /**
+     * {@inheritdoc}
+     */
+    public function get#MODEL#ById(int $id, array $columns = ['*']): array
+    {
+        return $this->model->getOneById($id, $columns);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function find#MODEL#ByWhere(array $where, array $columns = ['*'], array $options = []): array
+    {
+        return $this->model->findByWhere($where, $columns, $options);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function get#MODEL_PLURA#ById(array $ids, array $columns = ['*']): array
+    {
+        return $this->model->getAllById($ids, $columns);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function get#MODEL#List(array $where, array $columns = ['*'], array $options = []): array
+    {
+        return $this->model->getPageList($where, $columns, $options);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function create#MODEL#(array $data): int
+    {
+        return $this->model->createOne($data);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function create#MODEL_PLURA#(array $data): bool
+    {
+        return $this->model->createAll($data);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function update#MODEL#ById(int $id, array $data): int
+    {
+        return $this->model->updateOneById($id, $data);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function delete#MODEL#(int $id): int
+    {
+        return $this->model->deleteOne($id);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function delete#MODEL_PLURA#(array $ids): int
+    {
+        return $this->model->deleteAll($ids);
+    }
+
+}

@@ -1,0 +1,15 @@
+<?php
+
+declare(strict_types=1);
+
+namespace #NAMESPACE#;
+
+use YogCloud\Framework\Controller\AbstractController;
+use Hyperf\HttpServer\Annotation\Controller;
+
+/**
+ * @Controller()
+ */
+class #ControllerN# extends AbstractController
+{
+}
