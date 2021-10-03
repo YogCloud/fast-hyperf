@@ -41,11 +41,19 @@ class ModelCommand extends HyperfModelCommand
     protected function configure()
     {
         parent::configure();
+        $this->setDescription('生成Model, 默认生成于 app/Model 目录下 自动生成Service,Interface');
         $this->addOption(
             'force-others',
             'fo',
             InputOption::VALUE_OPTIONAL,
             '是否强制覆盖modelTrait、service、serviceInterface',
+            false
+        );
+        $this->addOption(
+            'cache',
+            'c',
+            InputOption::VALUE_OPTIONAL,
+            '是否启用查询缓存',
             false
         );
     }
@@ -95,11 +103,16 @@ class ModelCommand extends HyperfModelCommand
 
         $table        = Str::replaceFirst($option->getPrefix(), '', $table);
         $forceService = $this->input->getOption('force-others') !== false;
-
+        if (! $this->input->getOption('cache')) {
+            $isCache = true;
+        } else {
+            $isCache = $this->input->getOption('cache');
+            $isCache = (bool) eval("return {$isCache};");
+        }
         ## 生成服务契约
         $this->createServiceInterface($table, $option->getPath(), $forceService);
         ## 生成服务
-        $this->createService($table, $option->getPath(), $forceService);
+        $this->createService($table, $option->getPath(), $forceService, $isCache);
     }
 
     /**
@@ -122,13 +135,15 @@ class ModelCommand extends HyperfModelCommand
      * @param string $table 表名
      * @param string $modelPath 模型路径
      * @param bool $isForce 是否强制生成
+     * @param bool $isCache 是否启用缓存
      */
-    protected function createService(string $table, string $modelPath, bool $isForce): void
+    protected function createService(string $table, string $modelPath, bool $isForce, bool $isCache): void
     {
         $this->call('gen:service', [
             'table'        => trim($table),
             '--model-path' => $modelPath,
             '--force'      => $isForce,
+            '--cache'      => $isCache,
         ]);
     }
 }

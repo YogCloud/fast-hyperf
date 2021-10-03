@@ -6,6 +6,8 @@ namespace #SERVICE_NAMESPACE#;
 
 use #MODEL_NAMESPACE#\#MODEL#;
 use #INTERFACE_NAMESPACE#\#MODEL#ServiceInterface;
+#CACHE_NAMESPACE#
+#DELCACHE_NAMESPACE#
 use YogCloud\Framework\Service\AbstractService;
 
 class #MODEL#Service extends AbstractService implements #MODEL#ServiceInterface
@@ -17,6 +19,7 @@ class #MODEL#Service extends AbstractService implements #MODEL#ServiceInterface
 
     /**
      * {@inheritdoc}
+     * #GET_CACHE#
      */
     public function get#MODEL#ById(int $id, array $columns = ['*']): array
     {
@@ -65,6 +68,7 @@ class #MODEL#Service extends AbstractService implements #MODEL#ServiceInterface
 
     /**
      * {@inheritdoc}
+     * #DEL_CACHE#
      */
     public function update#MODEL#ById(int $id, array $data): int
     {
@@ -73,6 +77,7 @@ class #MODEL#Service extends AbstractService implements #MODEL#ServiceInterface
 
     /**
      * {@inheritdoc}
+     * #DEL_CACHE#
      */
     public function delete#MODEL#(int $id): int
     {
