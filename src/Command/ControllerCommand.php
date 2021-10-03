@@ -105,7 +105,7 @@ class ControllerCommand extends HyperfCommand
         $dirPath .= '/' . $name;
         $nameSpace = ucfirst(str_replace('/', '\\', $dirPath));
         $nameSpace = substr($nameSpace, 0, strlen($nameSpace) - strlen($name) - 1);
-        $stub = file_get_contents(__DIR__ . '/stubs/Controller.stub');
+        $stub      = file_get_contents(__DIR__ . '/stubs/Controller.stub');
 
         $serviceFile = BASE_PATH . '/' . $dirPath . '.php';
 
