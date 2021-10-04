@@ -106,8 +106,7 @@ class ModelCommand extends HyperfModelCommand
         if (! $this->input->getOption('cache')) {
             $isCache = true;
         } else {
-            $isCache = $this->input->getOption('cache');
-            $isCache = (bool) eval("return {$isCache};");
+            $isCache = $this->isBool($this->input->getOption('cache'));
         }
         ## 生成服务契约
         $this->createServiceInterface($table, $option->getPath(), $forceService);
@@ -145,5 +144,10 @@ class ModelCommand extends HyperfModelCommand
             '--force'      => $isForce,
             '--cache'      => $isCache,
         ]);
+    }
+
+    protected function isBool(string $bool): bool
+    {
+        return !($bool === 'false');
     }
 }
