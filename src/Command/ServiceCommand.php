@@ -49,7 +49,7 @@ class ServiceCommand extends HyperfCommand
         [$models, $path] = $this->stubConfig();
         ## 缓存
         $cache = $this->input->getOption('cache');
-        $this->createServices($models, $path, $this->isBool((string)$cache));
+        $this->createServices($models, $path, $this->isBool((string) $cache));
     }
 
     /**
@@ -92,6 +92,6 @@ class ServiceCommand extends HyperfCommand
 
     protected function isBool(string $bool): bool
     {
-        return !($bool === 'false');
+        return ! ($bool === 'false');
     }
 }

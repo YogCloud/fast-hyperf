@@ -148,6 +148,6 @@ class ModelCommand extends HyperfModelCommand
 
     protected function isBool(string $bool): bool
     {
-        return !($bool === 'false');
+        return ! ($bool === 'false');
     }
 }
