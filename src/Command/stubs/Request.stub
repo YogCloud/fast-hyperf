@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace #NAMESPACE#;
 
-//use Farm\App\Kernel\Request\AbstractRequest;
+use YogCloud\Framework\Request\AbstractRequest;
 
-class #REQUEST# extends ValidateSceneTrait
+class #REQUEST# extends AbstractRequest
 {
     public function rules(): array
     {
-        return [];
+        return [
+
+        ];
     }
 }

@@ -34,7 +34,8 @@
         "phpstan/phpstan": "^0.12",
         "swoole/ide-helper": "dev-master",
         "hyperf/guzzle": "^2.2",
-        "hyperf/cache": "^2.2"
+        "hyperf/cache": "^2.2",
+        "hyperf/validation": "^2.2"
     },
     "config": {
         "sort-packages": true
