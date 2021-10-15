@@ -5,6 +5,23 @@ Hyperf 的一把梭骨架
 composer require yogcloud/framework
 ```
 
+# 功能
+提供从 `Controller` `Request` `Model` `Service` `Interface` 一整套生成命令
+```bash
+$ php bin/hyperf 
+gen
+    gen:controller        Create a new controller class
+    gen:model             生成Model, 默认生成于 app/Model 目录下 自动生成Service,Interface
+    gen:request           Create a new form request class
+    gen:service           生成service, 默认生成于 app/Service 目录下
+    gen:serviceInterface  生成service, 默认生成于 app/Rpc 目录下
+server
+  server:restart        Restart hyperf servers.
+  server:start          Start hyperf servers.
+  server:stop           Stop hyperf servers.
+```
+
+
 一键生成代码 快速CRUD
 ```bash
 php bin/hyperf.php gen:model test
