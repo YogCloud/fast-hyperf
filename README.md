@@ -31,6 +31,28 @@ success:[/demo/app/Rpc/TestServiceInterface.php]
 success:[/demo/app/Service/TestService.php]
 ```
 
+在 `app` 外生成
+
+因为设计之初就是为了多插件多功能模块
+
+因为`Hyperf/Utils/CodeGen->namespace`是读取`composer.json`来获取路径的所以需要在`json`文件内添加`app`外的路径
+```json
+"autoload": {
+    "psr-4": {
+        "App\\": "src/", // 默认情况
+        "Demo\\Plugin\\Test": "plugin/demo/test/src/" // 自定义插件/组件
+    }
+}
+```
+添加之后需要更新一下`composer`缓存
+```bash
+composer dump-autoload -o
+```
+生成
+```
+php bin/hyperf gen:model test --path plugin/demo/test/src
+```
+
 生成的TestService可方便操作数据免去大部分CRUD时间
 
 生成Service时 `--cache false` 可不启用缓存(默认启用)
