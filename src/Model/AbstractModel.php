@@ -169,6 +169,9 @@ class AbstractModel extends Model
         isset($options['skip']) && $model = $model->skip($options['skip']);
         isset($options['take']) && $model = $model->take($options['take']);
 
+        ## SelectRaw
+        isset($options['selectRaw']) && $model = $model->selectRaw($options['selectRaw']);
+
         ## With
         isset($options['with']) && $model = $model->with($options['with']);
 
