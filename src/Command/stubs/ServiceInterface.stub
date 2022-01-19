@@ -63,6 +63,14 @@ interface #INTERFACE#
     public function update#MODEL#ById(int $id, array $data): int;
 
     /**
+     * 修改多条 - 根据ID.
+     * @param array $where 查询条件
+     * @param array $data 修改数据
+     * @return int 修改条数
+     */
+    public function update#MODEL#ByWhere(array $where, array $data): int;
+
+    /**
      * 删除 - 单条
      * @param int $id 删除ID
      * @return int 删除条数

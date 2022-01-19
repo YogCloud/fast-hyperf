@@ -105,6 +105,18 @@ class AbstractModel extends Model
     }
 
     /**
+     * 根据条件更新数据
+     * @param array $where 条件
+     * @param array $data 修改数据
+     * @return int 修改条数
+     */
+    public function updateByWhere(array $where, array $data): int
+    {
+        $newData = $this->columnsFormat($data, true, true);
+        return $this->optionWhere($where)->update($newData);
+    }
+
+    /**
      * 删除 - 单条
      * @param int $id 删除ID
      * @return int 删除条数

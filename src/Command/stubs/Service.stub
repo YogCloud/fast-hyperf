@@ -77,6 +77,14 @@ class #MODEL#Service extends AbstractService implements #MODEL#ServiceInterface
 
     /**
      * {@inheritdoc}
+     */
+    public function update#MODEL#ByWhere(array $where, array $data): int
+    {
+        return $this->model->updateByWhere($where, $data);
+    }
+
+    /**
+     * {@inheritdoc}
      * #DEL_CACHE#
      */
     public function delete#MODEL#(int $id): int
