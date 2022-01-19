@@ -16,10 +16,7 @@ use YogCloud\Framework\Constants\ErrorCode;
  */
 class GuzzleRequestExceptionHandler extends ExceptionHandler
 {
-    /**
-     * @var StdoutLoggerInterface
-     */
-    protected $logger;
+    protected StdoutLoggerInterface $logger;
 
     public function __construct(StdoutLoggerInterface $logger)
     {
@@ -27,7 +24,7 @@ class GuzzleRequestExceptionHandler extends ExceptionHandler
     }
 
     /**
-     * @return mixed
+     * @return \Psr\Http\Message\ResponseInterface
      */
     public function handle(Throwable $throwable, \Psr\Http\Message\ResponseInterface $response)
     {

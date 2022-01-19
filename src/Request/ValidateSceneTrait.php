@@ -20,7 +20,8 @@ use Hyperf\Validation\ValidationException;
 trait ValidateSceneTrait
 {
     /**
-     * @var string 场景
+     * 场景.
+     * @var string
      */
     protected $validateScene;
 
@@ -51,6 +52,8 @@ trait ValidateSceneTrait
      * 场景验证
      * @param array $inputs 验证参数
      * @param string $scene 场景
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
      * @return array 验证参数
      */
     protected function validated(array $inputs, string $scene = ''): array

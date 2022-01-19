@@ -39,8 +39,8 @@ trait CommandTrait
     protected function touchFile(string $path, string $content = ''): ?int
     {
         $dir = dirname($path);
-        if (! is_dir($dir)) {
-            @mkdir($dir, 0755, true);
+        if (! is_dir($dir) && ! mkdir($dir, 0755, true) && ! is_dir($dir)) {
+            throw new \RuntimeException(sprintf('Directory "%s" was not created', $dir));
         }
         $res                   = file_put_contents($path, $content);
         $res === false && $res = null;

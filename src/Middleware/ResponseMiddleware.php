@@ -22,14 +22,12 @@ class ResponseMiddleware implements MiddlewareInterface
     use Route;
 
     /**
-     * @var string 路由白名单
+     * 路由白名单.
+     * @var string
      */
     protected $responseRawRoutes;
 
-    /**
-     * @var ContainerInterface
-     */
-    protected $container;
+    protected ContainerInterface $container;
 
     public function __construct(ContainerInterface $container, ConfigInterface $config)
     {

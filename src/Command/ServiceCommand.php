@@ -17,10 +17,7 @@ class ServiceCommand extends HyperfCommand
 {
     use CommandTrait;
 
-    /**
-     * @var ContainerInterface
-     */
-    protected $container;
+    protected ContainerInterface $container;
 
     public function __construct(ContainerInterface $container)
     {

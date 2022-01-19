@@ -105,7 +105,7 @@ class AbstractModel extends Model
     }
 
     /**
-     * 根据条件更新数据
+     * 根据条件更新数据.
      * @param array $where 条件
      * @param array $data 修改数据
      * @return int 修改条数
@@ -139,7 +139,7 @@ class AbstractModel extends Model
     /**
      * @param array $where 查询条件
      * @param string[] $options 可选项 ['orderByRaw'=> 'id asc', 'skip' => 15, 'take' => 5]
-     * @return
+     * @return \Hyperf\Database\Model\Builder|\Hyperf\Database\Query\Builder
      */
     public function optionWhere(array $where, array $options = [])
     {

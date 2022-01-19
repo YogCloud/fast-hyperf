@@ -23,10 +23,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
  */
 class RestartServer extends Command
 {
-    /**
-     * @var ContainerInterface
-     */
-    private $container;
+    private ContainerInterface $container;
 
     public function __construct(ContainerInterface $container)
     {

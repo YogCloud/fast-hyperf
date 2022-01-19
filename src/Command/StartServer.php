@@ -23,35 +23,17 @@ use Symfony\Component\Console\Style\SymfonyStyle;
  */
 class StartServer extends Command
 {
-    /**
-     * @var ContainerInterface
-     */
-    private $container;
+    private ContainerInterface $container;
 
-    /**
-     * @var SymfonyStyle
-     */
-    private $io;
+    private SymfonyStyle $io;
 
-    /**
-     * @var int
-     */
-    private $interval;
+    private int $interval;
 
-    /**
-     * @var bool
-     */
-    private $clear;
+    private bool $clear;
 
-    /**
-     * @var bool
-     */
-    private $daemonize;
+    private bool $daemonize;
 
-    /**
-     * @var string
-     */
-    private $php;
+    private string $php;
 
     public function __construct(ContainerInterface $container)
     {

@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace YogCloud\Framework\Service;
 
+use Hyperf\Database\Model\Model;
+
 abstract class AbstractService
 {
     /**
-     * @var \Hyperf\Database\Model\Model
+     * @var Model
      */
     protected $model;
 
