@@ -31,11 +31,12 @@
         "hyperf/framework": "^2.2",
         "hyperf/testing": "2.2.*",
         "overtrue/wechat": "~4.0",
-        "phpstan/phpstan": "^0.12",
+        "phpstan/phpstan": "^1.2",
         "swoole/ide-helper": "dev-master",
         "hyperf/guzzle": "^2.2",
         "hyperf/cache": "^2.2",
-        "hyperf/validation": "^2.2"
+        "hyperf/validation": "^2.2",
+        "rector/rector": "^0.12.9"
     },
     "config": {
         "sort-packages": true
@@ -43,7 +44,8 @@
     "scripts": {
         "test": "co-phpunit -c phpunit.xml --colors=always",
         "analyse": "phpstan analyse --memory-limit 1024M -l 0 ./src",
-        "cs-fix": "php-cs-fixer fix $1"
+        "cs-fix": "php-cs-fixer fix $1",
+        "rector": "rector process $1"
     },
     "extra": {
         "hyperf": {
