@@ -45,6 +45,14 @@ class #MODEL#Service extends AbstractService implements #MODEL#ServiceInterface
     /**
      * {@inheritdoc}
      */
+    public function get#MODEL_PLURA#ByWhere(array $where, array $columns = ['*'], array $options = []): array
+    {
+        return $this->model->getManyByWhere($where, $columns, $options);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function get#MODEL#List(array $where, array $columns = ['*'], array $options = []): array
     {
         return $this->model->getPageList($where, $columns, $options);

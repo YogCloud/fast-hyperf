@@ -32,6 +32,15 @@ interface #INTERFACE#
     public function get#MODEL_PLURA#ById(array $ids, array $columns = ['*']): array;
 
     /**
+     * 根据Where条件查询多条
+     * @param array $where 查询条件
+     * @param array $columns 查询字段
+     * @param array 可选项 ['orderByRaw'=> 'id asc', 'with' = [], 'selectRaw' => 'count(*) as count']
+     * @return array 数组
+     */
+    public function get#MODEL_PLURA#ByWhere(array $where, array $columns = ['*'], array $options = []): array;
+
+    /**
      * 多条分页.
      * @param array $where 查询条件
      * @param array|string[] $columns 查询字段

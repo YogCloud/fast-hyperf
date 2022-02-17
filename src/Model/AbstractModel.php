@@ -47,6 +47,16 @@ class AbstractModel extends Model
     }
 
     /**
+     * 根据Where条件查询多条
+     */
+    public function getManyByWhere(array $where, array $columns = ['*'], array $options = [])
+    {
+        $data          = $this->optionWhere($where, $options)->get($columns);
+        $data || $data = collect([]);
+        return $data->toArray();
+    }
+
+    /**
      * 多条分页.
      * @param array $where 查询条件
      * @param array|string[] $columns 查询字段
