@@ -1,13 +1,13 @@
 # fast-framework
 Hyperf 的一把梭骨架
 
-```bash
+```php
 composer require yogcloud/framework
 ```
 
 # 功能
 提供从 `Controller` `Request` `Model` `Service` `Interface` 一整套生成命令
-```bash
+```php
 $ php bin/hyperf 
 gen
     gen:controller        Create a new controller class
@@ -23,7 +23,7 @@ server
 
 
 一键生成代码 快速CRUD
-```bash
+```php
 php bin/hyperf.php gen:model test
 
 Model App\Model\Test was created.
@@ -46,11 +46,11 @@ success:[/demo/app/Service/TestService.php]
 }
 ```
 添加之后需要更新一下`composer`缓存
-```bash
+```php
 composer dump-autoload -o
 ```
 生成
-```
+```php
 php bin/hyperf gen:model test --path plugin/demo/test/src
 ```
 
@@ -64,7 +64,7 @@ php bin/hyperf gen:model test --path plugin/demo/test/src
 期待你们发现其他小技巧欢迎Pr
 
 1. `SelectRaw`
-```
+```php
 'selectRaw' => 'sum(`id`) as sum'
 ```
 # License
