@@ -31,6 +31,7 @@ success:[/demo/app/Rpc/TestServiceInterface.php]
 success:[/demo/app/Service/TestService.php]
 ```
 
+## 多插件生成
 在 `app` 外生成
 
 因为设计之初就是为了多插件多功能模块
@@ -58,102 +59,13 @@ php bin/hyperf gen:model test --path plugin/demo/test/src
 生成Service时 `--cache false` 可不启用缓存(默认启用)
 
 缓存会请求后生成, 更新/删除 删除缓存(默认9000TTL,不会一直占用资源)
-```php
-<?php
 
-declare(strict_types=1);
+## 技巧
+期待你们发现其他小技巧欢迎Pr
 
-namespace App\Service;
-
-use App\Model\Test;
-use App\Rpc\TestServiceInterface;
-use YogCloud\Framework\Annotation\ServiceCache;
-use YogCloud\Framework\Annotation\ServiceCacheEvict;
-use YogCloud\Framework\Service\AbstractService;
-
-class TestService extends AbstractService implements TestServiceInterface
-{
-    /**
-     * @var Test
-     */
-    protected $model;
-
-    /**
-     * {@inheritdoc}
-     * @ServiceCache()
-     */
-    public function getTestById(int $id, array $columns = ['*']): array
-    {
-        return $this->model->getOneById($id, $columns);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function findTestByWhere(array $where, array $columns = ['*'], array $options = []): array
-    {
-        return $this->model->findByWhere($where, $columns, $options);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getTestsById(array $ids, array $columns = ['*']): array
-    {
-        return $this->model->getAllById($ids, $columns);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getTestList(array $where, array $columns = ['*'], array $options = []): array
-    {
-        return $this->model->getPageList($where, $columns, $options);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function createTest(array $data): int
-    {
-        return $this->model->createOne($data);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function createTests(array $data): bool
-    {
-        return $this->model->createAll($data);
-    }
-
-    /**
-     * {@inheritdoc}
-     * @ServiceCacheEvict()
-     */
-    public function updateTestById(int $id, array $data): int
-    {
-        return $this->model->updateOneById($id, $data);
-    }
-
-    /**
-     * {@inheritdoc}
-     * @ServiceCacheEvict()
-     */
-    public function deleteTest(int $id): int
-    {
-        return $this->model->deleteOne($id);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function deleteTests(array $ids): int
-    {
-        return $this->model->deleteAll($ids);
-    }
-
-}
+1. `SelectRaw`
 ```
-
-
+'selectRaw' => 'sum(`id`) as sum'
+```
+# License
+Apache License Version 2.0, http://www.apache.org/licenses/
