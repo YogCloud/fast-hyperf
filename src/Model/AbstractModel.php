@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace YogCloud\Framework\Model;
 
+use Closure;
 use Hyperf\DbConnection\Model\Model;
 use Hyperf\Utils\Str;
 
@@ -158,14 +159,23 @@ class AbstractModel extends Model
 
         if (! empty($where) && is_array($where)) {
             foreach ($where as $k => $v) {
-                ## 一维数组
+                // 闭包
+                if ($v instanceof Closure) {
+                    $model = $model->where($v);
+                    continue;
+                }
+                // 一维数组
                 if (! is_array($v)) {
                     $model = $model->where($k, $v);
                     continue;
                 }
 
-                ## 二维索引数组
+                // 二维索引数组
                 if (is_numeric($k)) {
+                    if ($v[0] instanceof Closure) {
+                        $model = $model->where($v[0]);
+                        continue;
+                    }
                     $v[1]    = mb_strtoupper($v[1]);
                     $boolean = isset($v[3]) ? $v[3] : 'and';
                     if (in_array($v[1], ['=', '!=', '<', '<=', '>', '>=', 'LIKE', 'NOT LIKE'])) {
@@ -178,23 +188,23 @@ class AbstractModel extends Model
                         $model = $model->whereRaw($v[0], $v[2], $boolean);
                     }
                 } else {
-                    ## 二维关联数组
+                    // 二维关联数组
                     $model = $model->whereIn($k, $v);
                 }
             }
         }
 
-        ## 排序
+        // 排序
         isset($options['orderByRaw']) && $model = $model->orderByRaw($options['orderByRaw']);
 
-        ## 限制集合
+        // 限制集合
         isset($options['skip']) && $model = $model->skip($options['skip']);
         isset($options['take']) && $model = $model->take($options['take']);
 
-        ## SelectRaw
+        // SelectRaw
         isset($options['selectRaw']) && $model = $model->selectRaw($options['selectRaw']);
 
-        ## With
+        // With
         isset($options['with']) && $model = $model->with($options['with']);
 
         return $model;
