@@ -1,5 +1,5 @@
-# fast-framework
-Hyperf 的一把梭骨架
+# Fast-Hyperf
+Hyperf 的一把梭组件
 
 ```php
 composer require yogcloud/framework
@@ -66,6 +66,12 @@ php bin/hyperf gen:model test --path plugin/demo/test/src
 1. `SelectRaw`
 ```php
 'selectRaw' => 'sum(`id`) as sum'
+```
+2. `闭包Where查询`
+```php
+[function ($q) {
+    $q->where('id','=',1)->orWhere('id','=',2);
+}]
 ```
 # License
 Apache License Version 2.0, http://www.apache.org/licenses/
