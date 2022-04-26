@@ -92,4 +92,12 @@ interface #INTERFACE#
      * @return int 删除条数
      */
     public function delete#MODEL_PLURA#(array $ids): int;
+
+    /**
+     * 处理原生sql操作.
+     * @param mixed $raw
+     * @param array $where 可选项
+     * @return array
+     */
+    public function rawWhere($raw, array $where = []): array;
 }

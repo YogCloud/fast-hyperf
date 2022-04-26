@@ -108,4 +108,12 @@ class #MODEL#Service extends AbstractService implements #MODEL#ServiceInterface
         return $this->model->deleteAll($ids);
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function rawWhere($raw, array $where = []): array
+    {
+        return $this->model->rawWhere($raw, $where);
+    }
+
 }

@@ -148,6 +148,30 @@ class AbstractModel extends Model
     }
 
     /**
+     * 处理原生sql操作.
+     * @param mixed $raw
+     */
+    public function rawWhere($raw, array $where = []): array
+    {
+        $query = $this->optionWhere($where);
+        if (is_string($raw)) {
+            $query = $query->selectRaw($raw);
+        } else {
+            foreach ($raw as $k => $v) {
+                if (! is_array($v)) {
+                    $query = $query->selectRaw($v);
+                    continue;
+                }
+                $query = $query->selectRaw($v[0]);
+            }
+        }
+
+        $data          = $query->get();
+        $data || $data = collect([]);
+        return $data->toArray()[0] ?? [];
+    }
+
+    /**
      * @param array $where 查询条件
      * @param string[] $options 可选项 ['orderByRaw'=> 'id asc', 'skip' => 15, 'take' => 5]
      * @return \Hyperf\Database\Model\Builder|\Hyperf\Database\Query\Builder
