@@ -6,12 +6,9 @@ namespace %NAMESPACE%;
 
 %USES%
 use YogCloud\Framework\Model\AbstractModel;
-use Hyperf\Database\Model\Concerns\CamelCase;
 
 class %CLASS% extends AbstractModel
 {
-    use CamelCase;
-
     /**
      * The table associated with the model.
      *
