@@ -220,16 +220,17 @@ class AbstractModel extends Model
 
         // 排序
         isset($options['orderByRaw']) && $model = $model->orderByRaw($options['orderByRaw']);
-
         // 限制集合
         isset($options['skip']) && $model = $model->skip($options['skip']);
         isset($options['take']) && $model = $model->take($options['take']);
-
         // SelectRaw
         isset($options['selectRaw']) && $model = $model->selectRaw($options['selectRaw']);
-
         // With
         isset($options['with']) && $model = $model->with($options['with']);
+        // Limit
+        isset($options['limit']) && $model = $model->limit($options['limit']);
+        // GroupBy
+        isset($options['groupBy']) && $model = $model->groupBy((array) $options['groupByRaw']);
 
         return $model;
     }
