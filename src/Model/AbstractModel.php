@@ -87,6 +87,7 @@ class AbstractModel extends Model
     public function createOne(array $data): int
     {
         $newData = $this->columnsFormat($data, true, true);
+        $this->reSetAttribute($newData);
         return self::query()->insertGetId($newData);
     }
 
@@ -100,6 +101,10 @@ class AbstractModel extends Model
         $newData = array_map(function ($item) {
             return $this->columnsFormat($item, true, true);
         }, $data);
+        foreach ($newData as $idx => &$value) {
+            $this->reSetAttribute($value);
+        }
+        unset($value);
         return self::query()->insert($newData);
     }
 
@@ -112,6 +117,7 @@ class AbstractModel extends Model
     public function updateOneById(int $id, array $data): int
     {
         $newData = $this->columnsFormat($data, true, true);
+        $this->reSetAttribute($newData);
         return self::query()->where('id', $id)->update($newData);
     }
 
@@ -124,6 +130,7 @@ class AbstractModel extends Model
     public function updateByWhere(array $where, array $data): int
     {
         $newData = $this->columnsFormat($data, true, true);
+        $this->reSetAttribute($newData);
         return $this->optionWhere($where)->update($newData);
     }
 
@@ -323,5 +330,20 @@ class AbstractModel extends Model
 
         $sql = "update {$table} set {$setStr} where {$primary} in ({$idsStr})";
         return [$sql, $bindings];
+    }
+
+    /**
+     * 封装setAttribute.
+     */
+    protected function reSetAttribute(array &$data)
+    {
+        $class = get_class($this);
+        foreach ($data as $key => &$val) {
+            $func = 'set' . parse_name($key, 1) . 'Attribute';
+            if (method_exists($class, $func)) {
+                $val = make($class)->{$func}($val);
+            }
+        }
+        unset($val);
     }
 }
