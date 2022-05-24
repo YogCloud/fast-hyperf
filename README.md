@@ -13,22 +13,23 @@ composer require yogcloud/framework
 提供从 `Controller` `Request` `Model` `Service` `Interface` 一整套生成命令
 ```php
 $ php bin/hyperf 
-gen
-    gen:controller        Create a new controller class
-    gen:model             生成Model, 默认生成于 app/Model 目录下 自动生成Service,Interface
-    gen:request           Create a new form request class
-    gen:service           生成service, 默认生成于 app/Service 目录下
-    gen:serviceInterface  生成service, 默认生成于 app/Rpc 目录下
+fs
+    fs:controller        生成 controller, 默认生成于 app/Controller 目录下
+    fs:model             生成Model, 默认生成于 app/Model 目录下 自动生成Service,Interface
+    fs:plugin            plugin of hyperf install
+    fs:request           Farm - 生成request, 默认生成于 app/Request 目录下
+    fs:service           生成service, 默认生成于 app/Service 目录下
+    fs:serviceInterface  生成service, 默认生成于 app/Rpc 目录下
 server
-  server:restart        Restart hyperf servers.
-  server:start          Start hyperf servers.
-  server:stop           Stop hyperf servers.
+    server:restart       Restart hyperf servers.
+    server:start         Start hyperf servers.
+    server:stop          Stop hyperf servers.
 ```
 
 
 一键生成代码 快速CRUD
 ```php
-php bin/hyperf.php gen:model test
+php bin/hyperf.php fs:model test
 
 Model App\Model\Test was created.
 success:[/demo/app/Rpc/TestServiceInterface.php]
@@ -55,12 +56,12 @@ composer dump-autoload -o
 ```
 生成
 ```php
-php bin/hyperf gen:model test --path plugin/demo/test/src
+php bin/hyperf fs:model test --path plugin/demo/test/src
 ```
 
 生成的TestService可方便操作数据免去大部分CRUD时间
 
-生成Service时 `--cache false` 可不启用缓存(默认启用)
+> 生成Service时 `--cache false` 可不启用缓存(默认启用)
 
 缓存会请求后生成, 更新/删除 删除缓存(默认9000TTL,不会一直占用资源)
 
