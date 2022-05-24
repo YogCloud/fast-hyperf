@@ -21,7 +21,7 @@ class #MODEL#Service extends AbstractService implements #MODEL#ServiceInterface
      * {@inheritdoc}
      * #GET_CACHE#
      */
-    public function get#MODEL#ById(int $id, array $columns = ['*']): array
+    public function getOneById(int $id, array $columns = ['*']): array
     {
         return $this->model->getOneById($id, $columns);
     }
@@ -29,7 +29,7 @@ class #MODEL#Service extends AbstractService implements #MODEL#ServiceInterface
     /**
      * {@inheritdoc}
      */
-    public function find#MODEL#ByWhere(array $where, array $columns = ['*'], array $options = []): array
+    public function findByWhere(array $where, array $columns = ['*'], array $options = []): array
     {
         return $this->model->findByWhere($where, $columns, $options);
     }
@@ -37,7 +37,7 @@ class #MODEL#Service extends AbstractService implements #MODEL#ServiceInterface
     /**
      * {@inheritdoc}
      */
-    public function get#MODEL_PLURA#ById(array $ids, array $columns = ['*']): array
+    public function getAllById(array $ids, array $columns = ['*']): array
     {
         return $this->model->getAllById($ids, $columns);
     }
@@ -45,7 +45,7 @@ class #MODEL#Service extends AbstractService implements #MODEL#ServiceInterface
     /**
      * {@inheritdoc}
      */
-    public function get#MODEL_PLURA#ByWhere(array $where, array $columns = ['*'], array $options = []): array
+    public function getManyByWhere(array $where, array $columns = ['*'], array $options = []): array
     {
         return $this->model->getManyByWhere($where, $columns, $options);
     }
@@ -53,7 +53,7 @@ class #MODEL#Service extends AbstractService implements #MODEL#ServiceInterface
     /**
      * {@inheritdoc}
      */
-    public function get#MODEL#List(array $where, array $columns = ['*'], array $options = []): array
+    public function getPageList(array $where, array $columns = ['*'], array $options = []): array
     {
         return $this->model->getPageList($where, $columns, $options);
     }
@@ -61,7 +61,7 @@ class #MODEL#Service extends AbstractService implements #MODEL#ServiceInterface
     /**
      * {@inheritdoc}
      */
-    public function create#MODEL#(array $data): int
+    public function createOne(array $data): int
     {
         return $this->model->createOne($data);
     }
@@ -69,7 +69,7 @@ class #MODEL#Service extends AbstractService implements #MODEL#ServiceInterface
     /**
      * {@inheritdoc}
      */
-    public function create#MODEL_PLURA#(array $data): bool
+    public function createAll(array $data): bool
     {
         return $this->model->createAll($data);
     }
@@ -78,7 +78,7 @@ class #MODEL#Service extends AbstractService implements #MODEL#ServiceInterface
      * {@inheritdoc}
      * #DEL_CACHE#
      */
-    public function update#MODEL#ById(int $id, array $data): int
+    public function updateOneById(int $id, array $data): int
     {
         return $this->model->updateOneById($id, $data);
     }
@@ -86,7 +86,7 @@ class #MODEL#Service extends AbstractService implements #MODEL#ServiceInterface
     /**
      * {@inheritdoc}
      */
-    public function update#MODEL#ByWhere(array $where, array $data): int
+    public function updateByWhere(array $where, array $data): int
     {
         return $this->model->updateByWhere($where, $data);
     }
@@ -95,7 +95,7 @@ class #MODEL#Service extends AbstractService implements #MODEL#ServiceInterface
      * {@inheritdoc}
      * #DEL_CACHE#
      */
-    public function delete#MODEL#(int $id): int
+    public function deleteOne(int $id): int
     {
         return $this->model->deleteOne($id);
     }
@@ -103,7 +103,7 @@ class #MODEL#Service extends AbstractService implements #MODEL#ServiceInterface
     /**
      * {@inheritdoc}
      */
-    public function delete#MODEL_PLURA#(array $ids): int
+    public function deleteAll(array $ids): int
     {
         return $this->model->deleteAll($ids);
     }

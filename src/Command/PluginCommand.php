@@ -66,7 +66,7 @@ class PluginCommand extends HyperfCommand
         $this->installDir      = $pluginDir . '/vendor';
         $this->archiveDir      = $pluginDir . '/archive';
 
-        parent::__construct('mcPlugin');
+        parent::__construct('fs:plugin');
     }
 
     public function configure(): void

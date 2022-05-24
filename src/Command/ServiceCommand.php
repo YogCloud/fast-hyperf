@@ -6,7 +6,6 @@ namespace YogCloud\Framework\Command;
 
 use Hyperf\Command\Annotation\Command;
 use Hyperf\Command\Command as HyperfCommand;
-use Hyperf\Utils\Str;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -23,7 +22,7 @@ class ServiceCommand extends HyperfCommand
     {
         $this->container = $container;
 
-        parent::__construct('gen:service');
+        parent::__construct('fs:service');
     }
 
     public function configure()
@@ -78,8 +77,8 @@ class ServiceCommand extends HyperfCommand
 
             $serviceFile = BASE_PATH . '/' . str_replace('Model', 'Service', $modelPath) . '/' . $model . 'Service.php';
             $fileContent = str_replace(
-                ['#MODEL#', '#MODEL_NAMESPACE#', '#SERVICE_NAMESPACE#', '#INTERFACE_NAMESPACE#', '#MODEL_PLURA#', '#GET_CACHE#', '#DEL_CACHE#', '#CACHE_NAMESPACE#', '#DELCACHE_NAMESPACE#'],
-                [$model, $modelSpace, $serviceSpace, $interfaceSpace, Str::plural($model), $get_cache, $del_cache, $cache_namespace, $delCache_namespace],
+                ['#MODEL#', '#MODEL_NAMESPACE#', '#SERVICE_NAMESPACE#', '#INTERFACE_NAMESPACE#', '#GET_CACHE#', '#DEL_CACHE#', '#CACHE_NAMESPACE#', '#DELCACHE_NAMESPACE#'],
+                [$model, $modelSpace, $serviceSpace, $interfaceSpace, $get_cache, $del_cache, $cache_namespace, $delCache_namespace],
                 $stub
             );
 

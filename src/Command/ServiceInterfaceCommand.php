@@ -6,7 +6,6 @@ namespace YogCloud\Framework\Command;
 
 use Hyperf\Command\Annotation\Command;
 use Hyperf\Command\Command as HyperfCommand;
-use Hyperf\Utils\Str;
 use Psr\Container\ContainerInterface;
 
 /**
@@ -22,7 +21,7 @@ class ServiceInterfaceCommand extends HyperfCommand
     {
         $this->container = $container;
 
-        parent::__construct('gen:serviceInterface');
+        parent::__construct('fs:serviceInterface');
     }
 
     public function configure()
@@ -56,8 +55,8 @@ class ServiceInterfaceCommand extends HyperfCommand
             $interface   = $model . 'ServiceInterface';
             $serviceFile = BASE_PATH . '/' . $interfacePath . '/' . $interface . '.php';
             $fileContent = str_replace(
-                ['#INTERFACE#', '#INTERFACE_NAMESPACE#', '#MODEL#', '#MODEL_PLURA#'],
-                [$interface, $interfaceSpace, $model, Str::plural($model)],
+                ['#INTERFACE#', '#INTERFACE_NAMESPACE#'],
+                [$interface, $interfaceSpace],
                 $stub
             );
             $this->doTouch($serviceFile, $fileContent);

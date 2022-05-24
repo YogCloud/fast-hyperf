@@ -23,7 +23,7 @@ class RequestCommand extends HyperfCommand
     {
         $this->container = $container;
 
-        parent::__construct('gen:request');
+        parent::__construct('fs:request');
     }
 
     public function configure()

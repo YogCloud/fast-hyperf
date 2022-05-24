@@ -34,7 +34,7 @@ class ModelCommand extends HyperfModelCommand
             }
         }
 
-        HyperfCommand::__construct('gen:model');
+        HyperfCommand::__construct('fs:model');
         $this->container = $container;
     }
 
@@ -122,7 +122,7 @@ class ModelCommand extends HyperfModelCommand
      */
     protected function createServiceInterface(string $table, string $modelPath, bool $isForce): void
     {
-        $this->call('gen:serviceInterface', [
+        $this->call('fs:serviceInterface', [
             'table'        => trim($table),
             '--model-path' => $modelPath,
             '--force'      => $isForce,
@@ -138,7 +138,7 @@ class ModelCommand extends HyperfModelCommand
      */
     protected function createService(string $table, string $modelPath, bool $isForce, bool $isCache): void
     {
-        $this->call('gen:service', [
+        $this->call('fs:service', [
             'table'        => trim($table),
             '--model-path' => $modelPath,
             '--force'      => $isForce,

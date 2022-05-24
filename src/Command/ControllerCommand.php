@@ -23,7 +23,7 @@ class ControllerCommand extends HyperfCommand
     {
         $this->container = $container;
 
-        parent::__construct('gen:controller');
+        parent::__construct('fs:controller');
     }
 
     public function configure()
