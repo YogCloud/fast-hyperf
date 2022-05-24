@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace YogCloud\Framework\Annotation;
 
+use Attribute;
 use Hyperf\Cache\CacheListenerCollector;
 use Hyperf\Di\Annotation\AbstractAnnotation;
 use Hyperf\Di\Annotation\AnnotationCollector;
@@ -12,6 +13,7 @@ use Hyperf\Di\Annotation\AnnotationCollector;
  * @Annotation
  * @Target({"METHOD"})
  */
+#[Attribute(Attribute::TARGET_METHOD)]
 class ServiceCache extends AbstractAnnotation
 {
     /**
@@ -49,13 +51,6 @@ class ServiceCache extends AbstractAnnotation
      * @var bool
      */
     public $collect = false;
-
-    public function __construct($value = null)
-    {
-        parent::__construct($value);
-        $this->ttl    = (int) $this->ttl;
-        $this->offset = (int) $this->offset;
-    }
 
     public function collectMethod(string $className, ?string $target): void
     {
