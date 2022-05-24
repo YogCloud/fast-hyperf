@@ -1,9 +1,13 @@
 # Fast-Hyperf
+[![Latest Stable Version](http://poser.pugx.org/yogcloud/framework/v)](https://packagist.org/packages/yogcloud/framework) [![Total Downloads](http://poser.pugx.org/yogcloud/framework/downloads)](https://packagist.org/packages/yogcloud/framework) [![Latest Unstable Version](http://poser.pugx.org/yogcloud/framework/v/unstable)](https://packagist.org/packages/yogcloud/framework) [![License](http://poser.pugx.org/yogcloud/framework/license)](https://packagist.org/packages/yogcloud/framework) [![PHP Version Require](http://poser.pugx.org/yogcloud/framework/require/php)](https://packagist.org/packages/yogcloud/framework)
+
 Hyperf 的一把梭组件
+
 
 ```php
 composer require yogcloud/framework
 ```
+
 
 # 功能
 提供从 `Controller` `Request` `Model` `Service` `Interface` 一整套生成命令
