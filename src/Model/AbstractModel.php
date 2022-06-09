@@ -179,6 +179,14 @@ class AbstractModel extends Model
     }
 
     /**
+     * 获取单列数据.
+     */
+    public function valueWhere(string $column, array $where = []): string
+    {
+        return (string) $this->optionWhere($where)->value($column);
+    }
+
+    /**
      * @param array $where 查询条件
      * @param string[] $options 可选项 ['orderByRaw'=> 'id asc', 'skip' => 15, 'take' => 5]
      * @return \Hyperf\Database\Model\Builder|\Hyperf\Database\Query\Builder
@@ -209,7 +217,7 @@ class AbstractModel extends Model
                     }
                     $v[1]    = mb_strtoupper($v[1]);
                     $boolean = isset($v[3]) ? $v[3] : 'and';
-                    if (in_array($v[1], ['=', '!=', '<', '<=', '>', '>=', 'LIKE', 'NOT LIKE'])) {
+                    if (in_array($v[1], ['=', '!=', '<', '<=', '>', '>=', 'LIKE', 'NOT LIKE', '<>'])) {
                         $model = $model->where($v[0], $v[1], $v[2], $boolean);
                     } elseif ($v[1] == 'IN') {
                         $model = $model->whereIn($v[0], $v[2], $boolean);
@@ -217,6 +225,12 @@ class AbstractModel extends Model
                         $model = $model->whereNotIn($v[0], $v[2], $boolean);
                     } elseif ($v[1] == 'RAW') {
                         $model = $model->whereRaw($v[0], $v[2], $boolean);
+                    } elseif ($v[1] == 'BETWEEN') {
+                        $model = $model->whereBetween($v[0], $v[2], $boolean);
+                    } elseif ($v[1] == 'NOTNULL') {
+                        $model = $model->whereNotNull($v[0], $boolean);
+                    } elseif ($v[1] == 'NULL') {
+                        $model = $model->whereNull($v[0], $boolean);
                     }
                 } else {
                     // 二维关联数组
@@ -238,6 +252,8 @@ class AbstractModel extends Model
         isset($options['limit']) && $model = $model->limit($options['limit']);
         // GroupBy
         isset($options['groupBy']) && $model = $model->groupBy((array) $options['groupByRaw']);
+        // value
+        isset($options['value']) && $model = $model->value($options['value']);
 
         return $model;
     }
