@@ -55,7 +55,7 @@ class ServiceCommand extends HyperfCommand
     {
         $modelSpace     = ucfirst(str_replace('/', '\\', $modelPath));
         $serviceSpace   = str_replace('Model', 'Service', $modelSpace);
-        $interfaceSpace = str_replace('Model', 'Rpc', $modelSpace);
+        $interfaceSpace = str_replace('Model', 'Service', $modelSpace);
 
         $stub = file_get_contents(__DIR__ . '/stubs/Service.stub');
 

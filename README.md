@@ -17,11 +17,11 @@ composer require yogcloud/framework
 $ php bin/hyperf 
 fs
     fs:controller        生成 controller, 默认生成于 app/Controller 目录下
-    fs:model             生成Model, 默认生成于 app/Model 目录下 自动生成Service,Interface
+    fs:model             生成 Model, 默认生成于 app/Model 目录下 自动生成 Service,Interface
     fs:plugin            plugin of hyperf install
-    fs:request           生成request, 默认生成于 app/Request 目录下
-    fs:service           生成service, 默认生成于 app/Service 目录下
-    fs:serviceInterface  生成service, 默认生成于 app/Rpc 目录下
+    fs:request           生成 request, 默认生成于 app/Request 目录下
+    fs:service           生成 service, 默认生成于 app/Service 目录下
+    fs:serviceInterface  生成 service Interface, 默认生成于 app/Service 目录下
 server
     server:restart       Restart hyperf servers.
     server:start         Start hyperf servers.
@@ -38,12 +38,12 @@ success:[/demo/app/Rpc/TestServiceInterface.php]
 success:[/demo/app/Service/TestService.php]
 ```
 
-## 多插件生成
-在 `app` 外生成
+## 多应用
+在 主项目外生成
 
-因为设计之初就是为了多插件多功能模块
+设计之初就是为了多应用多功能模块
 
-因为`Hyperf/Utils/CodeGen->namespace`是读取`composer.json`来获取路径的所以需要在`json`文件内添加`app`外的路径
+因为`Hyperf/Utils/CodeGen`需要读取`composer-psr4`所以需要添加生成的路径
 ```json
 "autoload": {
     "psr-4": {
