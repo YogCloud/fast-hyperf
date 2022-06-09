@@ -16,7 +16,7 @@ trait CommandTrait
             'force',
             'f',
             InputOption::VALUE_OPTIONAL,
-            '是否强制覆盖',
+            'Whether to force coverage',
             false
         );
 
@@ -24,17 +24,15 @@ trait CommandTrait
             'model-path',
             'mp',
             InputOption::VALUE_OPTIONAL,
-            '模型文件夹路径, 该生成文件基于模型位置',
+            'Model folder path, this generated file is based on model location',
             'app/Model'
         );
 
-        $this->addArgument('table', InputArgument::OPTIONAL, '表名称', false);
+        $this->addArgument('table', InputArgument::OPTIONAL, 'table name', false);
     }
 
     /**
-     * @param string $path 文件路径
-     * @param string $content 文件内容
-     * @return int 返回字节
+     * @return int
      */
     protected function touchFile(string $path, string $content = ''): ?int
     {
@@ -48,17 +46,17 @@ trait CommandTrait
     }
 
     /**
-     * @return array stub变量内容
+     * @return array stub variable content
      */
     protected function stubConfig(string $optionPath = 'model-path'): array
     {
-        ## 路径
+        // path
         $dirPath = $this->input->getOption($optionPath);
         if (! $dirPath) {
-            throw new RuntimeException('获取参数[--' . $optionPath . ']失败', 500);
+            throw new RuntimeException('get parameters [--' . $optionPath . '] fail', 500);
         }
 
-        ## 名称
+        // name
         $name = $this->input->getArgument('table');
         if ($name) {
             $name = array_reduce(explode('_', $name), function ($carry, $item) {
@@ -74,15 +72,15 @@ trait CommandTrait
     }
 
     /**
-     * @param string $serviceFile 生成文件路径 + 文件名
-     * @param string $fileContent 生成文件内容
+     * @param string $serviceFile generate file path + filename
+     * @param string $fileContent generate file content
      */
     protected function doTouch(string $serviceFile, string $fileContent): void
     {
         $isForce = $this->input->getOption('force');
         $flag    = 0;
         if (file_exists($serviceFile)) {
-            ## 强制覆盖
+            // Force coverage
             if ($isForce === false) {
                 $this->line('exist:[' . $serviceFile . ']', 'error');
                 return;

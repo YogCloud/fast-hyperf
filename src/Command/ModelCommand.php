@@ -16,7 +16,7 @@ use Hyperf\Utils\Str;
 use Symfony\Component\Console\Input\InputOption;
 
 /**
- * 模型trait生成.
+ * Model trait generation.
  * @Command
  */
 class ModelCommand extends HyperfModelCommand
@@ -41,25 +41,25 @@ class ModelCommand extends HyperfModelCommand
     protected function configure()
     {
         parent::configure();
-        $this->setDescription('生成Model, 默认生成于 app/Model 目录下 自动生成Service,Interface');
+        $this->setDescription('Generate Model, default generate app/Model, Automatic generated Service,Interface');
         $this->addOption(
             'force-others',
             'fo',
             InputOption::VALUE_OPTIONAL,
-            '是否强制覆盖modelTrait、service、serviceInterface',
+            'Whether to force coverage modelTrait、service、serviceInterface',
             false
         );
         $this->addOption(
             'cache',
             'c',
             InputOption::VALUE_OPTIONAL,
-            '是否启用查询缓存',
+            'Whether to enable query cache',
             false
         );
     }
 
     /**
-     * 忽略模型重写.
+     * Ignore model overrides.
      */
     protected function isIgnoreTable(string $table, ModelOption $option): bool
     {
@@ -72,7 +72,7 @@ class ModelCommand extends HyperfModelCommand
             return true;
         }
 
-        ## 前缀忽略
+        // prefix ignored
         $tablePrefix = $this->config->get('databases.default.');
 
         return $table === $this->config->get('databases.migrations', 'migrations');
@@ -94,11 +94,11 @@ class ModelCommand extends HyperfModelCommand
     }
 
     /**
-     * 模型生成重写.
+     * Model Generation Override.
      */
     protected function createModel(string $table, ModelOption $option)
     {
-        ## 生成模型
+        // generative model
         parent::createModel($table, $option);
 
         $table        = Str::replaceFirst($option->getPrefix(), '', $table);
@@ -108,17 +108,14 @@ class ModelCommand extends HyperfModelCommand
         } else {
             $isCache = $this->isBool($this->input->getOption('cache'));
         }
-        ## 生成服务契约
+        // Generate service interface
         $this->createServiceInterface($table, $option->getPath(), $forceService);
-        ## 生成服务
+        // Build service
         $this->createService($table, $option->getPath(), $forceService, $isCache);
     }
 
     /**
-     * 生成服务契约.
-     * @param string $table 表名
-     * @param string $modelPath 模型路径
-     * @param bool $isForce 是否强制生成
+     * generate service interface.
      */
     protected function createServiceInterface(string $table, string $modelPath, bool $isForce): void
     {
@@ -130,11 +127,7 @@ class ModelCommand extends HyperfModelCommand
     }
 
     /**
-     * 生成服务
-     * @param string $table 表名
-     * @param string $modelPath 模型路径
-     * @param bool $isForce 是否强制生成
-     * @param bool $isCache 是否启用缓存
+     * generate service.
      */
     protected function createService(string $table, string $modelPath, bool $isForce, bool $isCache): void
     {

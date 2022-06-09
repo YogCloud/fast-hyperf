@@ -19,7 +19,7 @@ class ValidationExceptionHandler extends ExceptionHandler
         /** @var \Hyperf\Validation\ValidationException $throwable */
         $falseMsg = $throwable->validator->errors()->first();
 
-        ## 格式化输出
+        // format
         $data = responseDataFormat(ErrorCode::INVALID_PARAMS, $falseMsg);
 
         $dataStream = new SwooleStream(json_encode($data, JSON_UNESCAPED_UNICODE));

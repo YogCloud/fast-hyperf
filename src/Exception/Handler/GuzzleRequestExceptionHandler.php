@@ -12,7 +12,7 @@ use Throwable;
 use YogCloud\Framework\Constants\ErrorCode;
 
 /**
- * guzzle请求异常.
+ * guzzle request error.
  */
 class GuzzleRequestExceptionHandler extends ExceptionHandler
 {
@@ -34,18 +34,18 @@ class GuzzleRequestExceptionHandler extends ExceptionHandler
         } else {
             $rawResData['msg'] = $throwable->getMessage();
         }
-        ## 记录日志
+
         $this->logger->error(sprintf('%s[%s] in %s', $throwable->getMessage(), $throwable->getLine(), $throwable->getFile()));
         $this->logger->error($throwable->getTraceAsString());
 
-        ## 格式化输出
-        $falseMsg   = isset($rawResData['msg']) ? $rawResData['msg'] : '请求错误';
+        // format
+        $falseMsg   = isset($rawResData['msg']) ? $rawResData['msg'] : 'RequestError';
         $falseMsg   = ErrorCode::getMessage(ErrorCode::THIRD_API_ERROR) . $falseMsg;
         $data       = responseDataFormat(ErrorCode::THIRD_API_ERROR, $falseMsg);
         $httpCode   = ErrorCode::getHttpCode(ErrorCode::THIRD_API_ERROR);
         $dataStream = new SwooleStream(json_encode($data, JSON_UNESCAPED_UNICODE));
 
-        ## 阻止异常冒泡
+        // Stop exception bubbling
         $this->stopPropagation();
         return $response->withHeader('Server', 'Hyperf')
             ->withAddedHeader('Content-Type', 'application/json;charset=utf-8')

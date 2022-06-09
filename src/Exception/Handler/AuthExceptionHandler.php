@@ -31,7 +31,7 @@ class AuthExceptionHandler extends ExceptionHandler
     {
         $code = ErrorCode::AUTH_FAILED;
 
-        ## 格式化输出
+        // format
         $throwable instanceof UnauthorizedException && $code                = ErrorCode::AUTH_UNAUTHORIZED;
         $throwable->getPrevious() instanceof TokenExpiredException && $code = ErrorCode::AUTH_SESSION_EXPIRED;
         $throwable->getPrevious() instanceof InvalidTokenException && $code = ErrorCode::AUTH_TOKEN_INVALID;
@@ -42,7 +42,7 @@ class AuthExceptionHandler extends ExceptionHandler
         $data       = responseDataFormat($code, $falseMsg);
         $dataStream = new SwooleStream(json_encode($data, JSON_UNESCAPED_UNICODE));
 
-        ## 阻止异常冒泡
+        // Stop exception bubbling
         $this->stopPropagation();
         return $response->withHeader('Server', 'Hyperf')
             ->withAddedHeader('Content-Type', 'application/json;charset=utf-8')

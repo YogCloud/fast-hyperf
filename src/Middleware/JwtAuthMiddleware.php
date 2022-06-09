@@ -18,7 +18,8 @@ class JwtAuthMiddleware extends AuthMiddleware
     use Route;
 
     /**
-     * @var string 路由白名单
+     * Routing Whitelist.
+     * @var string
      */
     protected $authWhiteRoutes;
 
@@ -26,7 +27,7 @@ class JwtAuthMiddleware extends AuthMiddleware
 
     public function __construct(ContainerInterface $container, ConfigInterface $config)
     {
-        $this->auth            = $container->get(AuthManager::class); // 父auth莫名无法注入成功
+        $this->auth            = $container->get(AuthManager::class); // The parent auth somehow failed to inject successfully
         $this->authWhiteRoutes = $config->get('framework.auth_white_routes', []);
     }
 

@@ -14,7 +14,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 use YogCloud\Framework\Middleware\Traits\Route;
 
 /**
- * 格式化响应数据
+ * Format the response data
  * Class ResponseMiddleware.
  */
 class ResponseMiddleware implements MiddlewareInterface
@@ -22,7 +22,7 @@ class ResponseMiddleware implements MiddlewareInterface
     use Route;
 
     /**
-     * 路由白名单.
+     * Routing Whitelist.
      * @var string
      */
     protected $responseRawRoutes;

@@ -13,8 +13,7 @@ class AbstractModel extends Model
     /**
      * 查询单条 - 根据ID.
      * @param int $id ID
-     * @param array|string[] $columns 查询字段
-     * @return array 数组
+     * @param array|string[] $columns
      */
     public function getOneById(int $id, array $columns = ['*']): array
     {
@@ -37,8 +36,7 @@ class AbstractModel extends Model
     /**
      * 查询多条 - 根据ID.
      * @param array $ids ID
-     * @param array|string[] $columns 查询字段
-     * @return array 数组
+     * @param array|string[] $columns
      */
     public function getAllById(array $ids, array $columns = ['*']): array
     {
@@ -59,10 +57,8 @@ class AbstractModel extends Model
 
     /**
      * 多条分页.
-     * @param array $where 查询条件
-     * @param array|string[] $columns 查询字段
+     * @param array|string[] $columns
      * @param array $options 可选项 ['orderByRaw'=> 'id asc', 'perPage' => 15, 'page' => null, 'pageName' => 'page']
-     * @return array 分页结果 Hyperf\Paginator\Paginator::toArray
      */
     public function getPageList(array $where, array $columns = ['*'], array $options = []): array
     {
@@ -81,8 +77,6 @@ class AbstractModel extends Model
 
     /**
      * 添加单条
-     * @param array $data 添加的数据
-     * @return int 自增ID
      */
     public function createOne(array $data): int
     {
@@ -93,8 +87,6 @@ class AbstractModel extends Model
 
     /**
      * 添加多条
-     * @param array $data 添加的数据
-     * @return bool 执行结果
      */
     public function createAll(array $data): bool
     {
@@ -110,9 +102,6 @@ class AbstractModel extends Model
 
     /**
      * 修改单条 - 根据ID.
-     * @param int $id id
-     * @param array $data 修改数据
-     * @return int 修改条数
      */
     public function updateOneById(int $id, array $data): int
     {
@@ -123,9 +112,6 @@ class AbstractModel extends Model
 
     /**
      * 根据条件更新数据.
-     * @param array $where 条件
-     * @param array $data 修改数据
-     * @return int 修改条数
      */
     public function updateByWhere(array $where, array $data): int
     {
@@ -136,8 +122,6 @@ class AbstractModel extends Model
 
     /**
      * 删除 - 单条
-     * @param int $id 删除ID
-     * @return int 删除条数
      */
     public function deleteOne(int $id): int
     {
@@ -146,8 +130,6 @@ class AbstractModel extends Model
 
     /**
      * 删除 - 多条
-     * @param array $ids 删除ID
-     * @return int 删除条数
      */
     public function deleteAll(array $ids): int
     {
@@ -187,7 +169,6 @@ class AbstractModel extends Model
     }
 
     /**
-     * @param array $where 查询条件
      * @param string[] $options 可选项 ['orderByRaw'=> 'id asc', 'skip' => 15, 'take' => 5]
      * @return \Hyperf\Database\Model\Builder|\Hyperf\Database\Query\Builder
      */
@@ -198,18 +179,18 @@ class AbstractModel extends Model
 
         if (! empty($where) && is_array($where)) {
             foreach ($where as $k => $v) {
-                // 闭包
+                // Closure
                 if ($v instanceof Closure) {
                     $model = $model->where($v);
                     continue;
                 }
-                // 一维数组
+                // one-dimensional array
                 if (! is_array($v)) {
                     $model = $model->where($k, $v);
                     continue;
                 }
 
-                // 二维索引数组
+                // 2D indexed array
                 if (is_numeric($k)) {
                     if ($v[0] instanceof Closure) {
                         $model = $model->where($v[0]);
@@ -233,15 +214,15 @@ class AbstractModel extends Model
                         $model = $model->whereNull($v[0], $boolean);
                     }
                 } else {
-                    // 二维关联数组
+                    // two-dimensional associative array
                     $model = $model->whereIn($k, $v);
                 }
             }
         }
 
-        // 排序
+        // orderBy
         isset($options['orderByRaw']) && $model = $model->orderByRaw($options['orderByRaw']);
-        // 限制集合
+        // restricted collection
         isset($options['skip']) && $model = $model->skip($options['skip']);
         isset($options['take']) && $model = $model->take($options['take']);
         // SelectRaw
@@ -349,7 +330,7 @@ class AbstractModel extends Model
     }
 
     /**
-     * 封装setAttribute.
+     * package setAttribute.
      */
     protected function reSetAttribute(array &$data)
     {
