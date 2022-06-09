@@ -116,4 +116,11 @@ class #MODEL#Service extends AbstractService implements #MODEL#ServiceInterface
         return $this->model->rawWhere($raw, $where);
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function valueWhere(string $column, array $where): string
+    {
+        return $this->repository->valueWhere($column, $where);
+    }
 }

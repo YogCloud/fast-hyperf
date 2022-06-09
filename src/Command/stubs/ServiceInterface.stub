@@ -100,4 +100,12 @@ interface #INTERFACE#
      * @return array
      */
     public function rawWhere($raw, array $where = []): array;
+
+    /**
+     * 获取单个值
+     * @param string $column
+     * @param array $where
+     * @return string
+     */
+    public function valueWhere(string $column, array $where): string;
 }
