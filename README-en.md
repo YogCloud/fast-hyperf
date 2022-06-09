@@ -61,7 +61,7 @@ php bin/hyperf fs:model test --path plugin/demo/test/src
 
 The generated TestService can easily manipulate data and save most of the development time
 
-> 生成Service时 `--cache false` Cache can be disabled (enabled by default)
+> generate Service `--cache false` Cache can be disabled (enabled by default)
 
 Cache will be generated after request, update/delete delete cache (default 9000TTL, will not occupy resources all the time)
 
