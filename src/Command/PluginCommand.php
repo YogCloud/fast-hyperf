@@ -120,7 +120,7 @@ class PluginCommand extends HyperfCommand
         }
         // Publish static resources
         $this->staticPublish();
-        ## mysql.plugin Add table data
+        // mysql.plugin Add table data
         $this->pluginDbInsert();
     }
 
@@ -136,7 +136,7 @@ class PluginCommand extends HyperfCommand
         }
         // plugin Directory deletion
         $this->delDir($this->pkgInstallDir);
-        ## mysql.plugin table data soft delete
+        // mysql.plugin table data soft delete
         $this->pluginDbDelete();
     }
 
