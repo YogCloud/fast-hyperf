@@ -21,7 +21,7 @@ class MySqlGrammarAspect extends AbstractAspect
     ];
 
     /**
-     * 兼容mysql8.
+     * Compatible with mysql8.
      * @return string ...
      */
     public function process(ProceedingJoinPoint $proceedingJoinPoint): string

@@ -22,7 +22,7 @@ class PluginEvent
     }
 
     /**
-     * 获取插件包名称.
+     * Get plug-in package name.
      * @return string ...
      */
     public function getPackage(): string
@@ -31,7 +31,7 @@ class PluginEvent
     }
 
     /**
-     * 获取插件包版本.
+     * Get plug-in package version.
      * @return string ...
      */
     public function getVersion(): string

@@ -41,27 +41,27 @@ class RequestCommand extends HyperfCommand
             'path',
             'ap',
             InputOption::VALUE_OPTIONAL,
-            '验证器文件夹路径',
+            'Validator folder path',
             'app/Request'
         );
 
-        $this->addArgument('class', InputArgument::OPTIONAL, 'class名称', false);
+        $this->addArgument('class', InputArgument::OPTIONAL, 'Class name', false);
     }
 
     public function handle()
     {
-        ## 路径
+        // path
         $dirPath = $this->input->getOption('path');
-        ## 名称
+        // name
         $name = $this->input->getArgument('class');
 
         $this->createActions($name, $dirPath);
     }
 
     /**
-     * 创建验证器.
+     * Create validator.
      * @param string $name name
-     * @param string $dirPath 路径
+     * @param string $dirPath path
      */
     protected function createActions(string $name, string $dirPath): void
     {

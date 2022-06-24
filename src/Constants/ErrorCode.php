@@ -8,7 +8,7 @@ use Hyperf\Constants\AbstractConstants;
 use Hyperf\Constants\Annotation\Constants;
 
 /**
- * 错误code
+ * Error code
  * 3位HTTP码 + 6位业务码[前3位为模块，后3位为业务]
  * 有其它错误码需求，即使补充
  * 业务模块码:

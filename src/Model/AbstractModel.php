@@ -11,7 +11,7 @@ use Hyperf\Utils\Str;
 class AbstractModel extends Model
 {
     /**
-     * 查询单条 - 根据ID.
+     * Query single entry - by ID.
      * @param int $id ID
      * @param array|string[] $columns
      */
@@ -23,7 +23,7 @@ class AbstractModel extends Model
     }
 
     /**
-     * 查询单条 - 根据Where条件.
+     * Query single - according to the where condition.
      * @param array|string[] $columns
      */
     public function findByWhere(array $where, array $columns = ['*'], array $options = []): array
@@ -34,7 +34,7 @@ class AbstractModel extends Model
     }
 
     /**
-     * 查询多条 - 根据ID.
+     * Query multiple - by ID.
      * @param array $ids ID
      * @param array|string[] $columns
      */
@@ -46,7 +46,7 @@ class AbstractModel extends Model
     }
 
     /**
-     * 根据Where条件查询多条
+     * Query multiple items according to where criteria.
      */
     public function getManyByWhere(array $where, array $columns = ['*'], array $options = [])
     {
@@ -56,27 +56,27 @@ class AbstractModel extends Model
     }
 
     /**
-     * 多条分页.
+     * Multiple pages.
      * @param array|string[] $columns
-     * @param array $options 可选项 ['orderByRaw'=> 'id asc', 'perPage' => 15, 'page' => null, 'pageName' => 'page']
+     * @param array $options Optional ['orderByRaw'=> 'id asc', 'perPage' => 15, 'page' => null, 'pageName' => 'page']
      */
     public function getPageList(array $where, array $columns = ['*'], array $options = []): array
     {
         $model = $this->optionWhere($where, $options);
 
-        ## 分页参数
+        // Paging parameters
         $perPage  = isset($options['perPage']) ? (int) $options['perPage'] : 15;
         $pageName = $options['pageName'] ?? 'page';
         $page     = isset($options['page']) ? (int) $options['page'] : null;
 
-        ## 分页
+        // paging
         $data          = $model->paginate($perPage, $columns, $pageName, $page);
         $data || $data = collect([]);
         return $data->toArray();
     }
 
     /**
-     * 添加单条
+     * Add single.
      */
     public function createOne(array $data): int
     {
@@ -86,7 +86,7 @@ class AbstractModel extends Model
     }
 
     /**
-     * 添加多条
+     * Add multiple.
      */
     public function createAll(array $data): bool
     {
@@ -101,7 +101,7 @@ class AbstractModel extends Model
     }
 
     /**
-     * 修改单条 - 根据ID.
+     * Modify single entry - according to ID.
      */
     public function updateOneById(int $id, array $data): int
     {
@@ -111,7 +111,7 @@ class AbstractModel extends Model
     }
 
     /**
-     * 根据条件更新数据.
+     * Update data based on conditions.
      */
     public function updateByWhere(array $where, array $data): int
     {
@@ -121,7 +121,7 @@ class AbstractModel extends Model
     }
 
     /**
-     * 删除 - 单条
+     * Delete - Single.
      */
     public function deleteOne(int $id): int
     {
@@ -129,7 +129,7 @@ class AbstractModel extends Model
     }
 
     /**
-     * 删除 - 多条
+     * Delete - multiple.
      */
     public function deleteAll(array $ids): int
     {
@@ -137,7 +137,7 @@ class AbstractModel extends Model
     }
 
     /**
-     * 处理原生sql操作.
+     * Handle native SQL operations.
      * @param mixed $raw
      */
     public function rawWhere($raw, array $where = []): array
@@ -161,7 +161,7 @@ class AbstractModel extends Model
     }
 
     /**
-     * 获取单列数据.
+     * Get single column data.
      */
     public function valueWhere(string $column, array $where = []): string
     {
@@ -169,7 +169,7 @@ class AbstractModel extends Model
     }
 
     /**
-     * @param string[] $options 可选项 ['orderByRaw'=> 'id asc', 'skip' => 15, 'take' => 5]
+     * @param string[] $options Optional ['orderByRaw'=> 'id asc', 'skip' => 15, 'take' => 5]
      * @return \Hyperf\Database\Model\Builder|\Hyperf\Database\Query\Builder
      */
     public function optionWhere(array $where, array $options = [])
@@ -240,10 +240,10 @@ class AbstractModel extends Model
     }
 
     /**
-     * 格式化表字段.
+     * Format table fields.
      * @param array $value ...
-     * @param bool $isTransSnake 是否转snake
-     * @param bool $isColumnFilter 是否过滤表不存在的字段
+     * @param bool $isTransSnake Whether to switch to snake
+     * @param bool $isColumnFilter Filter fields that do not exist in the table
      * @return array ...
      */
     public function columnsFormat(array $value, bool $isTransSnake = false, bool $isColumnFilter = false): array
@@ -251,9 +251,9 @@ class AbstractModel extends Model
         $formatValue                     = [];
         $isColumnFilter && $tableColumns = array_flip(\Hyperf\Database\Schema\Schema::getColumnListing($this->getTable()));
         foreach ($value as $field => $fieldValue) {
-            ## 转snake
+            // Turn to snake
             $isTransSnake && $field = Str::snake($field);
-            ## 过滤
+            // filter
             if ($isColumnFilter && ! isset($tableColumns[$field])) {
                 continue;
             }
@@ -263,15 +263,15 @@ class AbstractModel extends Model
     }
 
     /**
-     * 批量修改 - case...then...根据ID.
-     * @param array $values 修改数据(必须包含ID)
-     * @param bool $transToSnake 是否key转snake
-     * @param bool $isColumnFilter 是否过滤不存在于表内的字段数据
-     * @return int 影响条数
+     * Batch modify - Case then... According to ID.
+     * @param array $values Modify data (must include ID)
+     * @param bool $transToSnake Key to snake
+     * @param bool $isColumnFilter Filter field data that does not exist in the table
+     * @return int Number of affected items
      */
     public function batchUpdateByIds(array $values, bool $transToSnake = false, bool $isColumnFilter = false): int
     {
-        ## ksort
+        // ksort
         foreach ($values as &$value) {
             ksort($value);
             $transToSnake && $value = $this->columnsFormat($value, $transToSnake, $isColumnFilter);

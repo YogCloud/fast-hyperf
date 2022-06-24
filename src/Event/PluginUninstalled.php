@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace YogCloud\Framework\Event;
 
 /**
- * 插件卸载后事件.
+ * Events triggered after uninstalling a plug-in.
  */
 class PluginUninstalled extends PluginEvent
 {
+    // TODO
 }

@@ -7,102 +7,102 @@ namespace #INTERFACE_NAMESPACE#;
 interface #INTERFACE#
 {
     /**
-     * 查询单条 - 根据ID.
+     * Query single entry - by ID.
      * @param int $id ID
-     * @param array|string[] $columns 查询字段
-     * @return array 数组
+     * @param array|string[] $columns Query field
+     * @return array
      */
     public function getOneById(int $id, array $columns = ['*']): array;
 
     /**
-     * 查询单条 - 根据Where条件.
-     * @param array $where 查询条件
-     * @param array|string[] $columns 查询字段
-     * @param array 可选项 ['orderByRaw'=> 'id asc', 'with' = []]
-     * @return array 数组
+     * Query single - according to the where condition.
+     * @param array $where
+     * @param array|string[] $columns
+     * @param array Optional ['orderByRaw'=> 'id asc', 'with' = []]
+     * @return array
      */
     public function findByWhere(array $where, array $columns=['*'], array $options = []): array;
 
     /**
-     * 查询多条 - 根据ID.
+     * Query multiple - by ID.
      * @param array $ids ID
-     * @param array|string[] $columns 查询字段
-     * @return array 数组
+     * @param array|string[] $columns
+     * @return array
      */
     public function getAllById(array $ids, array $columns = ['*']): array;
 
     /**
-     * 根据Where条件查询多条
-     * @param array $where 查询条件
-     * @param array $columns 查询字段
-     * @param array 可选项 ['orderByRaw'=> 'id asc', 'with' = [], 'selectRaw' => 'count(*) as count']
-     * @return array 数组
+     * Query multiple items according to where criteria.
+     * @param array $where
+     * @param array $columns
+     * @param array  ['orderByRaw'=> 'id asc', 'with' = [], 'selectRaw' => 'count(*) as count']
+     * @return array
      */
     public function getManyByWhere(array $where, array $columns = ['*'], array $options = []): array;
 
     /**
-     * 多条分页.
-     * @param array $where 查询条件
-     * @param array|string[] $columns 查询字段
-     * @param array $options 可选项 ['orderByRaw'=> 'id asc', 'perPage' => 15, 'page' => null, 'pageName' => 'page']
-     * @return array 分页结果 Hyperf\Paginator\Paginator::toArray
+     * Multiple pages.
+     * @param array $where
+     * @param array|string[] $columns
+     * @param array $options  ['orderByRaw'=> 'id asc', 'perPage' => 15, 'page' => null, 'pageName' => 'page']
+     * @return array
      */
     public function getPageList(array $where, array $columns = ['*'], array $options = []): array;
 
     /**
-     * 添加单条
-     * @param array $data 添加的数据
-     * @return int 自增ID
+     * Add single.
+     * @param array $data
+     * @return int
      */
     public function createOne(array $data): int;
 
     /**
-     * 添加多条
-     * @param array $data 添加的数据
-     * @return bool 执行结果
+     * Add multiple.
+     * @param array $data
+     * @return bool
      */
     public function createAll(array $data): bool;
 
     /**
-     * 修改单条 - 根据ID.
+     * Modify single entry - according to ID.
      * @param int $id id
-     * @param array $data 修改数据
-     * @return int 修改条数
+     * @param array $data
+     * @return int
      */
     public function updateOneById(int $id, array $data): int;
 
     /**
-     * 修改多条 - 根据ID.
-     * @param array $where 查询条件
-     * @param array $data 修改数据
-     * @return int 修改条数
+     * Modify multiple - according to ID.
+     * @param array $where
+     * @param array $data
+     * @return int
      */
     public function updateByWhere(array $where, array $data): int;
 
     /**
-     * 删除 - 单条
-     * @param int $id 删除ID
-     * @return int 删除条数
+     * Delete - Single.
+     * @param int $id
+     * @return int
      */
     public function deleteOne(int $id): int;
 
     /**
-     * 删除 - 多条
-     * @param array $ids 删除ID
-     * @return int 删除条数
+     * Delete - multiple.
+     * @param array $ids
+     * @return int
      */
     public function deleteAll(array $ids): int;
 
     /**
-     * 处理原生sql操作.
+     * Handle native SQL operations.
      * @param mixed $raw
-     * @param array $where 可选项
+     * @param array $where
      * @return array
      */
     public function rawWhere($raw, array $where = []): array;
 
     /**
-     * 获取单个值
+     * Get a single value
      * @param string $column
      * @param array $where
      * @return string

@@ -51,13 +51,13 @@ class ConfigProvider
             'publish' => [
                 [
                     'id'          => 'framework',
-                    'description' => 'framework配置',
+                    'description' => 'framework configuration',
                     'source'      => __DIR__ . '/../publish/framework.php',
                     'destination' => BASE_PATH . '/config/autoload/framework.php',
                 ],
                 [
                     'id'          => 'dependencies',
-                    'description' => '依赖配置',
+                    'description' => 'Dependent configuration',
                     'source'      => __DIR__ . '/../publish/dependencies.php',
                     'destination' => BASE_PATH . '/config/autoload/dependencies.php',
                 ],
@@ -66,9 +66,9 @@ class ConfigProvider
     }
 
     /**
-     * 模型服务与契约的依赖配置.
-     * @param string $path 契约与服务的相对路径
-     * @return array 依赖数据
+     * Dependency configuration of model services and contracts.
+     * @param string $path Relative path between contract and service
+     * @return array Dependent data
      */
     protected function serviceMap(string $path = 'app'): array
     {

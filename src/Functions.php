@@ -7,9 +7,9 @@ use Hyperf\AsyncQueue\JobInterface;
 
 if (! function_exists('readFileName')) {
     /**
-     * 取出某目录下所有php文件的文件名.
-     * @param string $path 文件夹目录
-     * @return array 文件名
+     * Get the file names of all PHP files in a directory.
+     * @param string $path Folder directory
+     * @return array file name
      */
     function readFileName(string $path): array
     {
@@ -82,7 +82,7 @@ if (! function_exists('format_throwable')) {
 
 if (! function_exists('dd')) {
     /**
-     * 调试 打印传参到控制台.
+     * Debug printing and transfer parameters to the console.
      */
     function dd(...$var)
     {
@@ -104,11 +104,12 @@ if (! function_exists('queue_push')) {
 
 if (! function_exists('parse_name')) {
     /**
-     * 字符串命名风格转换
-     * type 0 将Java风格转换为C的风格 1 将C风格转换为Java的风格
-     * @param string $name 字符串
-     * @param int $type 转换类型
-     * @param bool $ucfirst 首字母是否大写（驼峰规则）
+     * String naming style conversion
+     * type 0 Convert Java style to c style
+     * type 1 Convert c style to Java style.
+     * @param string $name
+     * @param int $type
+     * @param bool $ucfirst
      * @return string
      */
     function parse_name($name, $type = 0, $ucfirst = true)
