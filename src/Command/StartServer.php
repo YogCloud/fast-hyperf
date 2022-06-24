@@ -21,6 +21,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 /**
  * @\Hyperf\Command\Annotation\Command
  */
+#[\Hyperf\Command\Annotation\Command]
 class StartServer extends Command
 {
     private ContainerInterface $container;

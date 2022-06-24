@@ -11,6 +11,7 @@ use Hyperf\Di\Aop\ProceedingJoinPoint;
 /**
  * @Aspect
  */
+#[Aspect]
 class MySqlGrammarAspect extends AbstractAspect
 {
     public $classes = [

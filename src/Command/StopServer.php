@@ -13,6 +13,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 /**
  * @\Hyperf\Command\Annotation\Command
  */
+#[\Hyperf\Command\Annotation\Command]
 class StopServer extends Command
 {
     public function __construct()

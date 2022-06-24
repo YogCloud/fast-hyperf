@@ -16,6 +16,7 @@ use YogCloud\Framework\Event\PluginUninstalled;
 /**
  * @Command
  */
+#[Command]
 class PluginCommand extends HyperfCommand
 {
     /**

@@ -13,6 +13,7 @@ use Symfony\Component\Console\Input\InputOption;
 /**
  * @Command
  */
+#[Command]
 class ControllerCommand extends HyperfCommand
 {
     use CommandTrait;

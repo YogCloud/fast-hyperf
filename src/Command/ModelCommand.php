@@ -19,6 +19,7 @@ use Symfony\Component\Console\Input\InputOption;
  * Model trait generation.
  * @Command
  */
+#[Command]
 class ModelCommand extends HyperfModelCommand
 {
     public function __construct(ContainerInterface $container)
