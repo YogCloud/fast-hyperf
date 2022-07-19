@@ -124,3 +124,14 @@ if (! function_exists('parse_name')) {
         return strtolower(trim(preg_replace('/[A-Z]/', '_\\0', $name), '_'));
     }
 }
+
+if (! function_exists('number_device')) {
+    function number_device(string $prefix = 'default'): int
+    {
+        $prefix .= 'hyperf:sub_table:' . $prefix;
+        $redis = di(\Hyperf\Redis\Redis::class);
+        $count = $redis->bitCount($prefix);
+        $redis->setBit($prefix, (int) ($count + 1), true);
+        return $count + 1;
+    }
+}

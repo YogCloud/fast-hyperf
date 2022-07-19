@@ -7,9 +7,44 @@ namespace YogCloud\Framework\Model;
 use Closure;
 use Hyperf\DbConnection\Model\Model;
 use Hyperf\Utils\Str;
+use Swoole\Coroutine;
+use YogCloud\Framework\Lock\RedisLock;
 
 class AbstractModel extends Model
 {
+    /**
+     * 旧表名.
+     */
+    protected ?string $old_table = null;
+
+    /**
+     * 是否分表.
+     */
+    protected bool $isSubTable = false;
+
+    /**
+     * 分表策略
+     * Hash   拿分表键的值Hash取模进行路由。
+     * Range  拿分表键按照ID范围进行路由，比如id在1-10000的在第一个表中，10001-20000的在第二个表中，依次类推。
+     * date   拿分表键按照时间范围进行路由，比如时间在1月的在第一个表中，在2月的在第二个表中，依次类推。
+     */
+    protected string $subTableStrategy;
+
+    /**
+     * 分表策略 - Hash粒度.
+     */
+    protected string $subTableStrategyHashSize;
+
+    /**
+     * 分表策略 - 范围粒度.
+     */
+    protected string $subTableStrategyRangeSize;
+
+    /**
+     * 分表策略 - 时间粒度.
+     */
+    protected string $subTableStrategyDateFormat;
+
     /**
      * Query single entry - by ID.
      * @param int $id ID
@@ -169,6 +204,23 @@ class AbstractModel extends Model
     }
 
     /**
+     * 迁移分表数据.
+     */
+    public function migrateSubTable(array $data, string $key): int
+    {
+        $this->isSetSubTable($key);
+        $newData = $this->columnsFormat($data, true, true);
+        foreach ($newData as $item => &$value) {
+            if (is_array($value)) {
+                $value = Json::encode($value);
+            }
+        }
+        unset($value);
+        $this->reSetAttribute($newData);
+        return static::insertGetId($newData);
+    }
+
+    /**
      * @param string[] $options Optional ['orderByRaw'=> 'id asc', 'skip' => 15, 'take' => 5]
      * @return \Hyperf\Database\Model\Builder|\Hyperf\Database\Query\Builder
      */
@@ -239,6 +291,86 @@ class AbstractModel extends Model
         return $model;
     }
 
+    public function parseTableStrategy(string $id = null): string
+    {
+        switch ($this->subTableStrategy) {
+            case 'hash':
+                if (! $id) {
+                    $id = (string) $this->getSubTableId();
+                }
+                return (string) $this->hashID($id, $this->subTableStrategyHashSize);
+            case 'range':
+                if (! $id) {
+                    $id = (string) $this->getSubTableId();
+                }
+                return (string) ($id % $this->subTableStrategyRangeSize + 1);
+            case 'date':
+                if (! $id) {
+                    $id = (string) time();
+                }
+                switch ($this->subTableStrategyDateFormat) {
+                    case 'year':
+                        return date('Y', (int) $id);
+                    case 'month':
+                        return date('Ym', (int) $id);
+                    case 'day':
+                        return date('Ymd', (int) $id);
+                }
+        }
+        return '';
+    }
+
+    public function getSubTable(): string
+    {
+        if (! $this->old_table) {
+            $this->old_table = $this->getTable();
+        }
+        return $this->old_table;
+    }
+
+    public function setSubTable($table)
+    {
+        if (! $this->old_table) {
+            $this->old_table = $this->getTable();
+        }
+        return $this->setTable($table);
+    }
+
+    public function existsTable(string $id = null): string
+    {
+        $tablePrefix = \Hyperf\DbConnection\Db::connection()->getTablePrefix();
+        $table_name  = $tablePrefix . $this->getSubTable();
+        if ($this->isSubTable) {
+            $schema    = config('databases.default.database');
+            $sub_table = $this->parseTableStrategy($id);
+            if ($sub_table) {
+                $sub_table_name = $table_name . '_' . $sub_table;
+            } else {
+                $sub_table_name = $table_name;
+            }
+            $count = Db::select('SELECT COUNT(*) as number FROM `information_schema`.`TABLES` WHERE TABLE_SCHEMA = ? AND TABLE_NAME = ?', [$schema, $sub_table_name])[0]->number ?? null;
+            $lock  = di(RedisLock::class);
+            if (! $count || $count <= 0) {
+                if ($lock->lock($sub_table_name, 100)) {
+                    try {
+                        $create_table = 'Create Table';
+                        $ddl          = Db::select("SHOW CREATE TABLE `{$schema}`.`{$table_name}`")[0]->{$create_table};
+                        $new_ddl      = str_replace($table_name, $sub_table_name, $ddl);
+                        Db::select($new_ddl);
+                    } catch (\Throwable $e) {
+                    } finally {
+                        Coroutine::sleep(3);
+                        $lock->unlock($sub_table_name);
+                    }
+                } else {
+                    Coroutine::sleep(10);
+                }
+            }
+            return str_replace($tablePrefix, '', $sub_table_name);
+        }
+        return str_replace($tablePrefix, '', $table_name);
+    }
+
     /**
      * Format table fields.
      * @param array $value ...
@@ -284,6 +416,32 @@ class AbstractModel extends Model
 
         $affectedRows = \Hyperf\DbConnection\Db::update($sql, $bindings);
         return $affectedRows;
+    }
+
+    /**
+     * 是否设置分表表名.
+     * @param null|mixed $data
+     */
+    protected function isSetSubTable($data = null)
+    {
+        if ($this->isSubTable) {
+            switch (gettype($data)) {
+                case 'string':
+                    $id = $data;
+                    break;
+                case 'array':
+                    if (\count($data) > 1) {
+                        $id = $data[0];
+                    } else {
+                        $id = $data;
+                    }
+                    break;
+                default:
+                    $id = $this->getSubTableId();
+            }
+            $table = $this->existsTable((string) $id);
+            $this->setSubTable($table);
+        }
     }
 
     /**
@@ -342,5 +500,22 @@ class AbstractModel extends Model
             }
         }
         unset($val);
+    }
+
+    protected function hashID(string $id, string $max): int
+    {
+        $md5    = md5($id);
+        $str1   = substr($md5, 0, 2);
+        $str2   = substr($md5, -2, 2);
+        $newStr = intval($str1 . $str2, 16);
+        return $newStr % $max + 1;
+    }
+
+    protected function getSubTableId(): int
+    {
+        if ($this->subTableStrategy !== 'date') {
+            return number_device($this->getTable());
+        }
+        return time();
     }
 }
