@@ -226,7 +226,6 @@ class AbstractModel extends Model
      */
     public function optionWhere(array $where, array $options = [])
     {
-        /** @var \Hyperf\Database\Model\Builder $model */
         $model = new static();
 
         if (! empty($where) && is_array($where)) {
@@ -249,7 +248,7 @@ class AbstractModel extends Model
                         continue;
                     }
                     $v[1]    = mb_strtoupper($v[1]);
-                    $boolean = isset($v[3]) ? $v[3] : 'and';
+                    $boolean = $v[3] ?? 'and';
                     if (in_array($v[1], ['=', '!=', '<', '<=', '>', '>=', 'LIKE', 'NOT LIKE', '<>'])) {
                         $model = $model->where($v[0], $v[1], $v[2], $boolean);
                     } elseif ($v[1] == 'IN') {
@@ -284,10 +283,23 @@ class AbstractModel extends Model
         // Limit
         isset($options['limit']) && $model = $model->limit($options['limit']);
         // GroupBy
-        isset($options['groupBy']) && $model = $model->groupBy((array) $options['groupByRaw']);
+        isset($options['groupByRaw']) && $model = $model->groupBy((array) $options['groupByRaw']);
         // value
         isset($options['value']) && $model = $model->value($options['value']);
-
+        // table
+        isset($options['table']) && $model = $model->setSubTable($options['table']);
+        // sub table
+        if (! empty($options['sub_table'])) {
+            $table = $model->existsTable($options['sub_table']);
+            $model = $model->setSubTable($table);
+        }
+        // union
+        if (! empty($options['union'])) {
+            $unionValue = $options['union'];
+            unset($options['union']);
+            $query = $model->optionWhere($where, $options)->setSubTable($unionValue);
+            $model = $model->union($query);
+        }
         return $model;
     }
 
