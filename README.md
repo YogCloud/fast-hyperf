@@ -186,7 +186,9 @@ php bin/hyperf fs:model test --path plugin/demo/test/src
 [function ($q) {
     $q->where('id','=',1)->orWhere('id','=',2);
 }]
+```
 3. `分表查询`
+```php
 'sub_table' => '2022-06-10', // 这里传递日期 parseTableStrategy 回去解析你当前选择的分表策略进行解析对应的key
 ```
 # License
