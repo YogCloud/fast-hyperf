@@ -35,7 +35,8 @@ Model App\Model\Test was created.
 success:[/demo/app/Rpc/TestServiceInterface.php]
 success:[/demo/app/Service/TestService.php]
 ```
-CodeView
+
+Generate Code
 
 ```php
     /**
