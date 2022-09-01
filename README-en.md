@@ -1,7 +1,7 @@
 # Fast-Hyperf
 [![Latest Stable Version](http://poser.pugx.org/yogcloud/framework/v)](https://packagist.org/packages/yogcloud/framework) [![Total Downloads](http://poser.pugx.org/yogcloud/framework/downloads)](https://packagist.org/packages/yogcloud/framework) [![Latest Unstable Version](http://poser.pugx.org/yogcloud/framework/v/unstable)](https://packagist.org/packages/yogcloud/framework) [![License](http://poser.pugx.org/yogcloud/framework/license)](https://packagist.org/packages/yogcloud/framework) [![PHP Version Require](http://poser.pugx.org/yogcloud/framework/require/php)](https://packagist.org/packages/yogcloud/framework)
 
-A shuttle component for Hyperf
+A component based on Hyperf Framework with rapid installation
 
 
 ```php
@@ -68,11 +68,11 @@ Cache will be generated after request, update/delete delete cache (default 9000T
 ## Tips
 Looking forward to your discovery of other tips. Welcome to Pr
 
-1. `SelectRaw`
+1. `Give a query column an alias`
 ```php
 'selectRaw' => 'sum(`id`) as sum'
 ```
-2. `Closure Where query`
+2. `Construct to where clause by closure`
 ```php
 [function ($q) {
     $q->where('id','=',1)->orWhere('id','=',2);
