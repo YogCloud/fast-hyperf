@@ -23,7 +23,7 @@ trait ValidateSceneTrait
      * scene.
      * @var string
      */
-    protected $validateScene;
+    protected string $validateScene;
 
     /**
      * Filter rule scenario.

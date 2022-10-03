@@ -38,7 +38,8 @@ class RedisLock
         $key        = self::REDIS_LOCK_KEY_PREFIX . $name;
         while ($retryTimes-- > 0) {
             $kVal = microtime(true) + $expire + Coroutine::id();
-            $lock = (bool) $this->getLock($key, $expire, $kVal); // 上锁
+            // 上锁
+            $lock = (bool) $this->getLock($key, $expire, $kVal);
             if ($lock) {
                 $this->lockedNames[$key] = $kVal;
                 break;
@@ -74,7 +75,7 @@ LUA;
     /**
      * 获取锁 并执行.
      */
-    public function run(callable $func, string $name, int $expire = 5, int $retryTimes = 10, int $sleep = 100000)
+    public function run(callable $func, string $name, int $expire = 5, int $retryTimes = 10, int $sleep = 100000): bool
     {
         if ($this->lock($name, $expire, $retryTimes, $sleep)) {
             try {

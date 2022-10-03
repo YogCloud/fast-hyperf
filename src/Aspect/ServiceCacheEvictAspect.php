@@ -27,12 +27,12 @@ class ServiceCacheEvictAspect extends AbstractAspect
     /**
      * @var CacheManager
      */
-    protected $manager;
+    protected CacheManager $manager;
 
     /**
      * @var AnnotationManager
      */
-    protected $annotationManager;
+    protected AnnotationManager $annotationManager;
 
     public function __construct(CacheManager $manager, AnnotationManager $annotationManager)
     {

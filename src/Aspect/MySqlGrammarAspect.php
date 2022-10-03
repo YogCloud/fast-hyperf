@@ -18,8 +18,7 @@ class MySqlGrammarAspect extends AbstractAspect
         'Hyperf\Database\Schema\Grammars\MySqlGrammar::compileColumnListing',
     ];
 
-    public $annotations = [
-    ];
+    public $annotations = [];
 
     /**
      * Compatible with mysql8.

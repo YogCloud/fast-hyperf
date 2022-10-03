@@ -21,7 +21,7 @@ class JwtAuthMiddleware extends AuthMiddleware
      * Routing Whitelist.
      * @var string
      */
-    protected $authWhiteRoutes;
+    protected string $authWhiteRoutes;
 
     protected $guards = ['jwt'];
 
