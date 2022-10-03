@@ -17,25 +17,25 @@ class ServiceCacheEvict extends AbstractAnnotation
     /**
      * @var string
      */
-    public $prefix;
+    public string $prefix;
 
     /**
      * @var string
      */
-    public $value;
+    public string $value;
 
     /**
      * @var bool
      */
-    public $all = false;
+    public bool $all = false;
 
     /**
      * @var string
      */
-    public $group = 'default';
+    public string $group = 'default';
 
     /**
      * @var bool
      */
-    public $collect = false;
+    public bool $collect = false;
 }

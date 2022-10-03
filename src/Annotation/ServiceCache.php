@@ -19,38 +19,38 @@ class ServiceCache extends AbstractAnnotation
     /**
      * @var string
      */
-    public $prefix;
+    public string $prefix;
 
     /**
      * @var string
      */
-    public $value;
+    public string $value;
 
     /**
      * @var int
      */
-    public $ttl;
+    public int $ttl;
 
     /**
      * @var string
      */
-    public $listener;
+    public string $listener;
 
     /**
      * The max offset for ttl.
      * @var int
      */
-    public $offset = 0;
+    public int $offset = 0;
 
     /**
      * @var string
      */
-    public $group = 'default';
+    public string $group = 'default';
 
     /**
      * @var bool
      */
-    public $collect = false;
+    public bool $collect = false;
 
     public function collectMethod(string $className, ?string $target): void
     {
