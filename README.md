@@ -1,7 +1,7 @@
 # Fast-Hyperf
 [![Latest Stable Version](http://poser.pugx.org/yogcloud/framework/v)](https://packagist.org/packages/yogcloud/framework) [![Total Downloads](http://poser.pugx.org/yogcloud/framework/downloads)](https://packagist.org/packages/yogcloud/framework) [![Latest Unstable Version](http://poser.pugx.org/yogcloud/framework/v/unstable)](https://packagist.org/packages/yogcloud/framework) [![License](http://poser.pugx.org/yogcloud/framework/license)](https://packagist.org/packages/yogcloud/framework) [![PHP Version Require](http://poser.pugx.org/yogcloud/framework/require/php)](https://packagist.org/packages/yogcloud/framework)
 
-[English](README-en.md)
+[English](README-en.md) 
 
 Hyperf 的一把梭组件
 
@@ -184,7 +184,7 @@ php bin/hyperf fs:model test --path plugin/demo/test/src
 2. `闭包Where查询`
 ```php
 [function ($q) {
-    $q->where('id','=',1)->orWhere('id','=',2);
+    $q->where('id', '=', 1)->orWhere('id', '=', 2);
 }]
 ```
 3. `分表查询`

@@ -182,7 +182,7 @@ Looking forward to your discovery of other tips. Welcome to Pr
 2. `Closure Where query`
 ```php
 [function ($q) {
-    $q->where('id','=',1)->orWhere('id','=',2);
+    $q->where('id', '=', 1)->orWhere('id', '=', 2);
 }]
 ```
 # License
