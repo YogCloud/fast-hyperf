@@ -66,7 +66,6 @@ class ControllerCommand extends HyperfCommand
      */
 //    protected function createController(string $name, string $dirPath): void
 //    {
-    // TODO
 //        $dirPath .= '/' . $name;
 //        $nameSpace   = ucfirst(str_replace('/', '\\', $dirPath));
 //        $lowerAction = lcfirst($name);

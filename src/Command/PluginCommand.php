@@ -171,7 +171,7 @@ class PluginCommand extends HyperfCommand
             return true;
         }
 
-        // todo (插件市场)远程验证下载 - 待插件市功能
+        // TODO (插件市场)远程验证下载 - 待插件市功能
         $this->line('No local archive plugin, remote verification download...', 'info');
         $res = false;
         if ($res) {

@@ -193,5 +193,9 @@ php bin/hyperf fs:model test --path plugin/demo/test/src
 // 选择hash策略可以传ID
 // 选择取余策略可以传关键key
 ```
+
+# TODO 
+- 控制器生成 
+
 # License
 Apache License Version 2.0, http://www.apache.org/licenses/
