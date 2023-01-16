@@ -12,11 +12,10 @@ composer require yogcloud/framework
 # 功能
 提供从 `Controller` `Request` `Model` `Service` `Interface` 一整套生成命令
 ```php
-$ php bin/hyperf 
+$ php bin/hyperf
 fs
     fs:controller        生成 controller, 默认生成于 app/Controller 目录下
     fs:model             生成 Model, 默认生成于 app/Model 目录下 自动生成 Service,Interface
-    fs:plugin            plugin of hyperf install
     fs:request           生成 request, 默认生成于 app/Request 目录下
     fs:service           生成 service, 默认生成于 app/Service 目录下
     fs:serviceInterface  生成 service Interface, 默认生成于 app/Service 目录下
