@@ -12,4 +12,28 @@ use Hyperf\HttpServer\Annotation\Controller;
  */
 class #ControllerN# extends AbstractController
 {
+    public function get():array
+    {
+
+        //TODO
+        return [];
+    }
+
+    public function put():array
+    {
+        //TODO
+        return [];
+    }
+
+    public function post():array
+    {
+        //TODO
+        return [];
+    }
+
+    public function delete():array
+    {
+        //TODO
+        return [];
+    }
 }

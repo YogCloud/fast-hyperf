@@ -27,7 +27,7 @@ class PluginCommand extends HyperfCommand
     /**
      * @var EventDispatcherInterface
      */
-    protected $eventDispatcher;
+    protected ?EventDispatcherInterface $eventDispatcher;
 
     /**
      * @var string Plugin installation directory
