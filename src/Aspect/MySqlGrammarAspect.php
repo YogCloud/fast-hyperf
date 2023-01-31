@@ -22,6 +22,10 @@ class MySqlGrammarAspect extends AbstractAspect
 
     public ?int $priority = null;
 
+    /**
+     * Compatible with mysql8.
+     * @return string ...
+     */
     public function process(ProceedingJoinPoint $proceedingJoinPoint): string
     {
         return 'select `column_key` as `column_key`, `column_name` as `column_name`, `data_type` as `data_type`, `column_comment` as `column_comment`, `extra` as `extra`, `column_type` as `column_type` from information_schema.columns where `table_schema` = ? and `table_name` = ? order by ORDINAL_POSITION';
