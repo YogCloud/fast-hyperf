@@ -187,9 +187,5 @@ Looking forward to your discovery of other tips. Welcome to Pr
 }]
 ```
 
-
-# TODO
-- [ ] Generate Controller
-
 # License
 Apache License Version 2.0, http://www.apache.org/licenses/
