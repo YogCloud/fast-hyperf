@@ -20,7 +20,7 @@ use YogCloud\Framework\Annotation\ServiceCacheEvict;
 #[Aspect]
 class ServiceCacheEvictAspect extends AbstractAspect
 {
-    public $annotations = [
+    public array $annotations = [
         ServiceCacheEvict::class,
     ];
 

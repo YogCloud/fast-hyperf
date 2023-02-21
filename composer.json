@@ -26,16 +26,16 @@
         "ext-swoole": ">=4.5"
     },
     "require-dev": {
-        "96qbhy/hyperf-auth": "^2.2",
+        "96qbhy/hyperf-auth": "~3.0",
         "friendsofphp/php-cs-fixer": "^2.14",
-        "hyperf/framework": "^2.2",
-        "hyperf/testing": "2.2.*",
+        "hyperf/framework": "~3.0",
+        "hyperf/testing": "~3.0",
         "overtrue/wechat": "~4.0",
         "phpstan/phpstan": "^1.2",
         "swoole/ide-helper": "dev-master",
-        "hyperf/guzzle": "^2.2",
-        "hyperf/cache": "^2.2",
-        "hyperf/validation": "^2.2",
+        "hyperf/guzzle": "~3.0",
+        "hyperf/cache": "~3.0",
+        "hyperf/validation": "~3.0",
         "rector/rector": "^0.12.9"
     },
     "config": {

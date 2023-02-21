@@ -22,7 +22,7 @@ use YogCloud\Framework\Annotation\ServiceCache;
 #[Aspect]
 class ServiceCacheAspect extends AbstractAspect
 {
-    public $annotations = [
+    public array $annotations = [
         ServiceCache::class,
     ];
 

@@ -6,10 +6,33 @@ namespace #NAMESPACE#;
 
 use YogCloud\Framework\Controller\AbstractController;
 use Hyperf\HttpServer\Annotation\Controller;
+use Hyperf\HttpServer\Annotation\RequestMapping;
 
-/**
- * @Controller()
- */
+#[Controller]
 class #ControllerN# extends AbstractController
 {
+    #[RequestMapping(path: '/index', methods: ['GET'])]
+    public function Index()
+    {
+    }
+
+    #[RequestMapping(path: '/show', methods: ['GET'])]
+    public function Show()
+    {
+    }
+
+    #[RequestMapping(path: '/update', methods: ['POST'])]
+    public function Update()
+    {
+    }
+
+    #[RequestMapping(path: '/create', methods: ['POST'])]
+    public function Create()
+    {
+    }
+
+    #[RequestMapping(path: '/delete', methods: ['POST'])]
+    public function Delete()
+    {
+    }
 }

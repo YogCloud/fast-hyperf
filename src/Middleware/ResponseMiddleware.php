@@ -23,9 +23,9 @@ class ResponseMiddleware implements MiddlewareInterface
 
     /**
      * Routing Whitelist.
-     * @var string
+     * @var mixed
      */
-    protected string $responseRawRoutes;
+    protected mixed $responseRawRoutes;
 
     protected ContainerInterface $container;
 
